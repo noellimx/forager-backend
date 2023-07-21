@@ -1,6 +1,6 @@
-package com.noellimx.dummy.controllers.rest;
+package com.noellimx.web.controllers.rest;
 
-import com.noellimx.dummy.service.ArmyService;
+import com.noellimx.web.service.ArmyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

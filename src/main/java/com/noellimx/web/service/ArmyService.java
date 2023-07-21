@@ -1,4 +1,4 @@
-package com.noellimx.dummy.service;
+package com.noellimx.web.service;
 
 import org.springframework.stereotype.Component;
 
