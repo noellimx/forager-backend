@@ -17,7 +17,7 @@ public class AsClientTest {
   public void contextLoads() {
     this.webTestClient
         .get()
-        .uri("/api/users")
+        .uri("/some/unknown/api")
         .exchange()
         .expectStatus().is4xxClientError();
   }
