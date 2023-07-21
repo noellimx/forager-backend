@@ -15,11 +15,15 @@ public class AsClientTest {
 
   @Test
   public void contextLoads() {
+
+  }
+
+  @Test
+  public void ShouldReturn404() {
     this.webTestClient
         .get()
         .uri("/some/unknown/api")
         .exchange()
         .expectStatus().is4xxClientError();
   }
-
 }
