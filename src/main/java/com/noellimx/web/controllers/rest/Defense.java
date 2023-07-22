@@ -14,12 +14,17 @@ public class Defense {
   Service defenseService;
   Service defenseService2;
 
+  Service airService;
+
   @Autowired
-  public Defense(@Qualifier("navyService") Service defenseService,
-      @Qualifier("navyService") Service defenseService2) {
+  public Defense(@Qualifier("navyService") Service navyService1,
+      @Qualifier("navyService") Service navyService2,
+      @Qualifier("airService") Service airService) {
     // See qualified class for bean scope configuration
-    this.defenseService = defenseService;
-    this.defenseService2 = defenseService2;
+    this.defenseService = navyService1;
+    this.defenseService2 = navyService2;
+
+    this.airService = airService;
   }
 
   @GetMapping("/")
