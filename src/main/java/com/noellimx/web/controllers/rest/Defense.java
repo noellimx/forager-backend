@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class Defense {
 
   Service defenseService;
+  Service defenseService2;
 
   @Autowired
-  public Defense(@Qualifier("navyService") Service defenseService) {
+  public Defense(@Qualifier("navyService") Service defenseService,
+      @Qualifier("navyService") Service defenseService2) {
+    // See qualified class for bean scope configuration
     this.defenseService = defenseService;
+    this.defenseService2 = defenseService2;
   }
 
   @GetMapping("/")
