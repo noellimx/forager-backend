@@ -7,4 +7,6 @@ import org.springframework.stereotype.Component;
 public interface Service {
 
   public int RollCall();
+
+
 }
