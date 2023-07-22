@@ -18,7 +18,7 @@ public class HelloWorld {
 
   @GetMapping("/")
   public String sayHello() {
-    return "Hello at /" + this.some + venus.some();
+    return "Hello at / " + this.some + venus.some();
   }
 
   @GetMapping("/world")

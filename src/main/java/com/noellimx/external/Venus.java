@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 public class Venus {
 
   public String some() {
-
     return "venus alien";
   }
-
 }

@@ -11,11 +11,11 @@ development server: `./mvnw spring-boot:run -Dspring-boot.run.profiles=dev`
 
 #### Release
 
-Skip test during packaging.
+Test with test environment before packaging.
 
 ```
 #/bin/bash
-./mvnw -Dmaven.test.skip=true package
+./mvnw -Dspring.profiles.active=test package
 ```
 
 #### Configuration

@@ -1,12 +1,10 @@
 package com.noellimx.web.service;
 
+
 import org.springframework.stereotype.Component;
 
 @Component
+public interface Service {
 
-public class ArmyService implements Service {
-
-  public int RollCall() {
-    return -1;
-  }
+  public int RollCall();
 }
