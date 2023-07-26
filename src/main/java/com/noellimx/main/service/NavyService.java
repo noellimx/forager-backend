@@ -1,4 +1,4 @@
-package com.noellimx.web.service;
+package com.noellimx.main.service;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;

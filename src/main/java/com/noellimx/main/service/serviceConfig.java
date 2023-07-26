@@ -1,4 +1,4 @@
-package com.noellimx.web.service;
+package com.noellimx.main.service;
 
 
 import org.springframework.context.annotation.Bean;

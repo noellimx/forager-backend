@@ -1,8 +1,8 @@
-package com.noellimx.web;
+package com.noellimx.main;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.noellimx.web.test.config.TestSecurityConfig;
+import com.noellimx.main.test.config.TestSecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

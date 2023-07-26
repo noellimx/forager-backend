@@ -1,4 +1,4 @@
-package com.noellimx.web.controllers.rest;
+package com.noellimx.main.controllers.rest;
 
 
 import com.noellimx.external.Venus;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorld {
 
-  @Value("${some.name}")
+  @Value("${some.prop}")
   String some;
 
   @Autowired
