@@ -30,4 +30,9 @@ public class StudentDAO {
       entityManager.persist(s);
     }
   }
+
+  @Transactional
+  public Student findById(Integer id) {
+    return entityManager.find(Student.class, id);
+  }
 }
