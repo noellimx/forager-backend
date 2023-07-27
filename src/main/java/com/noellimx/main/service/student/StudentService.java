@@ -1,9 +1,10 @@
 package com.noellimx.main.service.student;
 
-import com.noellimx.main.dao.StudentDAO;
 import com.noellimx.main.entity.Student;
+import com.noellimx.main.respository.StudentRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,16 +12,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentService {
 
-  StudentDAO studentDAO;
+  StudentRepository studentDAO;
 
   @Autowired
-  public StudentService(StudentDAO studentDAO) {
+  public StudentService(StudentRepository studentDAO) {
     this.studentDAO = studentDAO;
   }
 
   @Transactional
   public List<Student> getAll() {
-    return studentDAO.getAll();
+    return studentDAO.findAll();
   }
 
   @Transactional
@@ -30,30 +31,36 @@ public class StudentService {
 
   @Transactional
   public List<Student> findByFirstAndLastName(String fn, String ln) {
-    return studentDAO.findByFirstAndLastName(fn, ln);
+    return studentDAO.findByFirstNameAndLastName(fn, ln);
   }
 
   @Transactional
   public Student getById(Integer id) {
-    return studentDAO.findById(id);
+    Optional<Student> s = studentDAO.findById(id);
+
+    if (s.isEmpty()) {
+      return null;
+    }
+
+    return s.get();
+
   }
 
 
   @Transactional
   public void update(Student student) {
-    studentDAO.update(student);
+    studentDAO.save(student);
   }
 
 
   @Transactional
   public void deleteStudent(Student student) {
-    studentDAO.removeById(student.getId());
+    studentDAO.delete(student);
   }
 
   @Transactional
   public void deleteStudentById(Integer id) {
-    studentDAO.removeById(id);
+    studentDAO.deleteById(id);
   }
-
 
 }
