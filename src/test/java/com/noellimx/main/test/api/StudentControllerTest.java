@@ -24,7 +24,7 @@ public class StudentControllerTest {
         .expectStatus().isOk().expectBody().consumeWith(response -> {
           String body = new String(response.getResponseBody(), StandardCharsets.UTF_8);
           assertEquals(body,
-              "[{\"id\":null,\"firstName\":\"abel\",\"lastName\":\"lee\",\"email\":\"@\"},{\"id\":null,\"firstName\":\"alex\",\"lastName\":\"poh\",\"email\":\"@\"},{\"id\":null,\"firstName\":\"xavier\",\"lastName\":\"tan\",\"email\":\"@\"}]");
+              "[{\"id\":1,\"firstName\":\"FirstSeedStudent\",\"lastName\":\"Lim\",\"email\":\"seed@email.com\"},{\"id\":2,\"firstName\":\"SecondSeedStudent\",\"lastName\":\"Lim\",\"email\":\"seed@email.com\"}]");
         });
   }
 
@@ -63,5 +63,5 @@ public class StudentControllerTest {
         .isEqualTo(501);
   }
 
-  
+
 }

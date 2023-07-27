@@ -3,8 +3,9 @@ package com.noellimx.main.controllers.rest;
 
 import com.noellimx.main.entity.Student;
 import com.noellimx.main.exception.controller.NotImplementedException;
-import java.util.ArrayList;
+import com.noellimx.main.service.student.Service;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,18 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/students")
 public class StudentController {
 
+
+  Service studentService;
+
+
+  @Autowired
+  public StudentController(Service studentService) {
+    this.studentService = studentService;
+  }
+
   @GetMapping("/")
   public List<Student> getStudents() {
-    Student student = new Student("abel", "lee", "@");
-    Student student2 = new Student("alex", "poh", "@");
-    Student student3 = new Student("xavier", "tan", "@");
-    List<Student> students = new ArrayList<>();
 
-    students.add(student);
-    students.add(student2);
-    students.add(student3);
-
-    return students;
+    return studentService.getAll();
   }
 
   @GetMapping("/{id}")
