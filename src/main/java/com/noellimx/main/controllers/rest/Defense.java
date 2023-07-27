@@ -1,6 +1,6 @@
 package com.noellimx.main.controllers.rest;
 
-import com.noellimx.main.service.Service;
+import com.noellimx.main.service.defense.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;

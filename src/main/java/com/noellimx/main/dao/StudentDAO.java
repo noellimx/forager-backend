@@ -29,7 +29,8 @@ public class StudentDAO {
   @Transactional
   public List<Student> findByLastName(String lastName) {
 
-    TypedQuery<Student> query = entityManager.createQuery("FROM Student WHERE lastName=:ln",
+    TypedQuery<Student> query = entityManager.createQuery(
+        "FROM Student WHERE lastName=:ln",
         Student.class);
     query.setParameter("ln", lastName);
     return query.getResultList();

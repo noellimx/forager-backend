@@ -1,4 +1,4 @@
-package com.noellimx.main.service;
+package com.noellimx.main.service.defense;
 
 
 public class AirService implements Service {
