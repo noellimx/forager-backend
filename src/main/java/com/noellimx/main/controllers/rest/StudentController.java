@@ -5,6 +5,7 @@ import com.noellimx.main.entity.Student;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentController {
 
   @GetMapping("/")
-  public List<Student> sayHelloWorld() {
+  public List<Student> getStudents() {
     Student student = new Student("abel", "lee", "@");
     Student student2 = new Student("alex", "poh", "@");
     Student student3 = new Student("xavier", "tan", "@");
@@ -26,4 +27,11 @@ public class StudentController {
     return students;
   }
 
+  @GetMapping("/{id}")
+  public Student getStudentById(@PathVariable int id) {
+    Student student = new Student("abel", "lee", "@");
+    student.setId(id);
+
+    return student;
+  }
 }

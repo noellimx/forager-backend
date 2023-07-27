@@ -17,7 +17,7 @@ public class StudentControllerTest {
 
 
   @Test
-  public void ShouldReturnStudents() {
+  public void ShouldReturnStudent_Many() {
     this.webTestClient
         .get()
         .uri("/students/")
@@ -27,6 +27,27 @@ public class StudentControllerTest {
           assertEquals(body,
               "[{\"id\":null,\"firstName\":\"abel\",\"lastName\":\"lee\",\"email\":\"@\"},{\"id\":null,\"firstName\":\"alex\",\"lastName\":\"poh\",\"email\":\"@\"},{\"id\":null,\"firstName\":\"xavier\",\"lastName\":\"tan\",\"email\":\"@\"}]");
         });
+  }
+
+
+  @Test
+  public void ShouldReturnStudent_One() {
+
+    Integer id = 1;
+    while (id++ < 3) {
+
+      Integer finalId = id;
+      this.webTestClient
+          .get()
+          .uri("/students/" + id)
+          .exchange()
+          .expectStatus().isOk().expectBody().consumeWith(response -> {
+            String body = new String(response.getResponseBody(), StandardCharsets.UTF_8);
+            assertEquals(body,
+                "{\"id\":" + finalId.toString()
+                    + ",\"firstName\":\"abel\",\"lastName\":\"lee\",\"email\":\"@\"}");
+          });
+    }
   }
 
 }
