@@ -1,8 +1,11 @@
 package com.noellimx.main.test.config;
 
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -39,7 +42,13 @@ public class TestSecurityConfiguration {
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.csrf(csrf -> csrf.disable()).httpBasic(Customizer.withDefaults());
+    http.csrf(csrf -> csrf.disable());
+    http.httpBasic(Customizer.withDefaults());
+    http.authorizeHttpRequests((authorizeHttpRequests) ->
+        authorizeHttpRequests
+            .requestMatchers(antMatcher(HttpMethod.PUT, "/**")).hasRole("USER")
+            .anyRequest().authenticated()
+    );
     return http.build();
   }
 }

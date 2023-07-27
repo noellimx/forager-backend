@@ -24,7 +24,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 @Import({BasicSecurityProfile.class, TestSecurityConfiguration.class})
 public class StudentControllerTest {
 
-  private BasicSecurityProfile testSecurityProfile;
+  private BasicSecurityProfile basicSecurityProfile;
 
   private WebTestClient webTestClient;
 
@@ -32,7 +32,7 @@ public class StudentControllerTest {
   @Autowired
   public StudentControllerTest(BasicSecurityProfile testSecurityConfig,
       WebTestClient webTestClient) {
-    this.testSecurityProfile = testSecurityConfig;
+    this.basicSecurityProfile = testSecurityConfig;
     this.webTestClient = webTestClient;
   }
 
@@ -42,8 +42,8 @@ public class StudentControllerTest {
     this.webTestClient
         .get()
         .uri("/students/")
-        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
-            testSecurityProfile.getPassword()))
+        .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
+            basicSecurityProfile.getPassword()))
         .exchange()
         .expectStatus().isOk().expectBody().consumeWith(response -> {
           String body = new String(response.getResponseBody(), StandardCharsets.UTF_8);
@@ -78,8 +78,8 @@ public class StudentControllerTest {
       this.webTestClient
           .get()
           .uri("/students/" + tc.id)
-          .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
-              testSecurityProfile.getPassword()))
+          .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
+              basicSecurityProfile.getPassword()))
           .exchange()
           .expectStatus().isOk().expectBody().consumeWith(response -> {
             String body = new String(response.getResponseBody(), StandardCharsets.UTF_8);
@@ -96,8 +96,8 @@ public class StudentControllerTest {
     this.webTestClient
         .get()
         .uri("/students/" + 9899)
-        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
-            testSecurityProfile.getPassword()))
+        .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
+            basicSecurityProfile.getPassword()))
         .exchange()
         .expectStatus().isNotFound().expectBody().jsonPath("$.message")
         .isEqualTo("Resource: Student not found")
@@ -129,8 +129,8 @@ public class StudentControllerTest {
     this.webTestClient
         .put()
         .uri("/students/")
-        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
-            testSecurityProfile.getPassword()))
+        .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
+            basicSecurityProfile.getPassword()))
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(tc.requestBody))
         .exchange()
@@ -150,16 +150,16 @@ public class StudentControllerTest {
     this.webTestClient
         .delete()
         .uri("/students/" + 1)
-        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
-            testSecurityProfile.getPassword()))
+        .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
+            basicSecurityProfile.getPassword()))
         .exchange()
         .expectStatus().isOk();
 
     this.webTestClient
         .delete()
         .uri("/students/" + 1)
-        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
-            testSecurityProfile.getPassword()))
+        .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
+            basicSecurityProfile.getPassword()))
         .exchange().expectBody()
         .jsonPath("$.message")
         .isEqualTo("Unable to delete null. Resource not found")
@@ -175,8 +175,8 @@ public class StudentControllerTest {
     this.webTestClient
         .get()
         .uri("/students/invalid")
-        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
-            testSecurityProfile.getPassword()))
+        .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
+            basicSecurityProfile.getPassword()))
         .exchange()
         .expectStatus().is5xxServerError()
         .expectBody()
