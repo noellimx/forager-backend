@@ -1,4 +1,4 @@
-package com.noellimx.main;
+package com.noellimx.main.test.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

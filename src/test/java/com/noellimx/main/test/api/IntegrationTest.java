@@ -1,4 +1,4 @@
-package com.noellimx.main;
+package com.noellimx.main.test.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
