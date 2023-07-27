@@ -15,9 +15,8 @@ public class StudentControllerTest {
   @Autowired
   private WebTestClient webTestClient;
 
-
   @Test
-  public void ShouldReturnStudent_Many() {
+  public void ShouldReturnOK_Student_Many() {
     this.webTestClient
         .get()
         .uri("/students/")
@@ -31,7 +30,7 @@ public class StudentControllerTest {
 
 
   @Test
-  public void ShouldReturnStudent_One() {
+  public void ShouldReturnOK_Student_One() {
 
     Integer id = 1;
     while (id++ < 3) {
@@ -50,4 +49,19 @@ public class StudentControllerTest {
     }
   }
 
+  @Test
+  public void ShouldReturnError_Student_InvalidPath() {
+    this.webTestClient
+        .get()
+        .uri("/students/invalid")
+        .exchange()
+        .expectStatus().isNotFound()
+        .expectBody()
+        .jsonPath("$.message")
+        .isEqualTo("oh no")
+        .jsonPath("$.status")
+        .isEqualTo(501);
+  }
+
+  
 }
