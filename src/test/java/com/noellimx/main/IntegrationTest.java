@@ -30,7 +30,7 @@ public class IntegrationTest {
     this.webTestClient
         .get()
         .uri("/")
-        .headers(headers -> headers.setBasicAuth("user", testSecurityConfig.getUserPassword()))
+//        .headers(headers -> headers.setBasicAuth("user", testSecurityConfig.getUserPassword()))
 
         .exchange()
         .expectStatus().isOk().returnResult(String.class).getResponseBody()
@@ -42,7 +42,7 @@ public class IntegrationTest {
     this.webTestClient
         .get()
         .uri("/defense")
-        .headers(headers -> headers.setBasicAuth("user", testSecurityConfig.getUserPassword()))
+//        .headers(headers -> headers.setBasicAuth("user", testSecurityConfig.getUserPassword()))
         .exchange()
         .expectStatus().isOk().returnResult(String.class).getResponseBody()
         .subscribe(responseBody -> {
