@@ -43,4 +43,17 @@ public class StudentService {
   public void update(Student student) {
     studentDAO.update(student);
   }
+
+
+  @Transactional
+  public void deleteStudent(Student student) {
+    studentDAO.removeById(student.getId());
+  }
+
+  @Transactional
+  public void deleteStudentById(Integer id) {
+    studentDAO.removeById(id);
+  }
+
+
 }

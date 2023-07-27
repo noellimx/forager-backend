@@ -72,8 +72,6 @@ public class StudentDAO {
   @Transactional
   public void removeById(Integer id) {
     Student student = findById(id);
-
-    System.out.println("removeById" + student);
     entityManager.remove(student);
   }
 

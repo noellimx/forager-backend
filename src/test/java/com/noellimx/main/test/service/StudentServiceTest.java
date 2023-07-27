@@ -31,14 +31,13 @@ public class StudentServiceTest {
     studentService.createStudent("My", "First", "Student");
     List<Student> students = studentService.findByFirstAndLastName("My", "First");
 
-    Assertions.assertTrue(students.size() == 1);
+    Assertions.assertEquals(1, students.size());
 
   }
 
   @Test
   @Order(2)
   public void ShouldUpdate() {
-
     List<Student> students = studentService.findByFirstAndLastName("My", "First");
     Assertions.assertTrue(students.size() > 0);
 
@@ -51,7 +50,6 @@ public class StudentServiceTest {
 
     Assertions.assertEquals(updatedLastName,
         studentService.getById(student.getId()).getLastName());
-
   }
 
 }
