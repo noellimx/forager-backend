@@ -3,7 +3,7 @@ package com.noellimx.main.controllers.rest;
 
 import com.noellimx.main.entity.Student;
 import com.noellimx.main.exception.controller.NotImplementedException;
-import com.noellimx.main.service.student.Service;
+import com.noellimx.main.service.student.StudentService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,17 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentController {
 
 
-  Service studentService;
+  StudentService studentService;
 
 
   @Autowired
-  public StudentController(Service studentService) {
+  public StudentController(StudentService studentService) {
     this.studentService = studentService;
   }
 
   @GetMapping("/")
   public List<Student> getStudents() {
-
     return studentService.getAll();
   }
 
@@ -34,7 +33,6 @@ public class StudentController {
   public Student getStudentById(@PathVariable int id) {
     Student student = new Student("abel", "lee", "@");
     student.setId(id);
-
     return student;
   }
 

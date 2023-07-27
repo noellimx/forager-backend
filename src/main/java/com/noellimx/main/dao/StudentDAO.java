@@ -53,7 +53,6 @@ public class StudentDAO {
     return entityManager.find(Student.class, id);
   }
 
-  @Transactional
   public List<Student> getAll() {
     TypedQuery<Student> query = entityManager.createQuery("FROM Student",
         Student.class);
