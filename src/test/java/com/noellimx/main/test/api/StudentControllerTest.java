@@ -2,6 +2,8 @@ package com.noellimx.main.test.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.noellimx.main.test.config.BasicSecurityProfile;
+import com.noellimx.main.test.config.TestSecurityConfiguration;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
@@ -12,17 +14,27 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(OrderAnnotation.class)
-
+@Import({BasicSecurityProfile.class, TestSecurityConfiguration.class})
 public class StudentControllerTest {
 
-  @Autowired
+  private BasicSecurityProfile testSecurityProfile;
+
   private WebTestClient webTestClient;
+
+
+  @Autowired
+  public StudentControllerTest(BasicSecurityProfile testSecurityConfig,
+      WebTestClient webTestClient) {
+    this.testSecurityProfile = testSecurityConfig;
+    this.webTestClient = webTestClient;
+  }
 
   @Test
   @Order(1)
@@ -30,6 +42,8 @@ public class StudentControllerTest {
     this.webTestClient
         .get()
         .uri("/students/")
+        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
+            testSecurityProfile.getPassword()))
         .exchange()
         .expectStatus().isOk().expectBody().consumeWith(response -> {
           String body = new String(response.getResponseBody(), StandardCharsets.UTF_8);
@@ -64,12 +78,11 @@ public class StudentControllerTest {
       this.webTestClient
           .get()
           .uri("/students/" + tc.id)
+          .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
+              testSecurityProfile.getPassword()))
           .exchange()
           .expectStatus().isOk().expectBody().consumeWith(response -> {
             String body = new String(response.getResponseBody(), StandardCharsets.UTF_8);
-
-            System.out.println("--ds-");
-            System.out.println(body);
             assertEquals(body,
                 tc.wantResponseBody);
           });
@@ -83,6 +96,8 @@ public class StudentControllerTest {
     this.webTestClient
         .get()
         .uri("/students/" + 9899)
+        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
+            testSecurityProfile.getPassword()))
         .exchange()
         .expectStatus().isNotFound().expectBody().jsonPath("$.message")
         .isEqualTo("Resource: Student not found")
@@ -114,10 +129,13 @@ public class StudentControllerTest {
     this.webTestClient
         .put()
         .uri("/students/")
+        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
+            testSecurityProfile.getPassword()))
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(tc.requestBody))
         .exchange()
-        .expectStatus().isOk().expectBody().consumeWith(response -> {
+        .expectStatus().isOk()
+        .expectBody().consumeWith(response -> {
           String body = new String(response.getResponseBody(), StandardCharsets.UTF_8);
           assertEquals(body,
               tc.wantResponseBody);
@@ -132,12 +150,16 @@ public class StudentControllerTest {
     this.webTestClient
         .delete()
         .uri("/students/" + 1)
+        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
+            testSecurityProfile.getPassword()))
         .exchange()
         .expectStatus().isOk();
 
     this.webTestClient
         .delete()
         .uri("/students/" + 1)
+        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
+            testSecurityProfile.getPassword()))
         .exchange().expectBody()
         .jsonPath("$.message")
         .isEqualTo("Unable to delete null. Resource not found")
@@ -153,6 +175,8 @@ public class StudentControllerTest {
     this.webTestClient
         .get()
         .uri("/students/invalid")
+        .headers(headers -> headers.setBasicAuth(testSecurityProfile.getUsername(),
+            testSecurityProfile.getPassword()))
         .exchange()
         .expectStatus().is5xxServerError()
         .expectBody()

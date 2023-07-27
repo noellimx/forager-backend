@@ -56,6 +56,7 @@ public class StudentController {
 
     studentService.deleteStudentById(id);
     student = studentService.getById(id);
+
     if (student != null) {
 
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
