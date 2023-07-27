@@ -1,7 +1,6 @@
 package com.noellimx.main;
 
-import com.noellimx.main.dao.StudentDAO;
-import com.noellimx.main.entity.Student;
+import com.noellimx.main.service.student.StudentService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,14 +23,11 @@ public class IpptApp {
   }
 
   @Bean
-  public CommandLineRunner seedStudent(StudentDAO studentDAO) {
+  public CommandLineRunner seedStudents(StudentService studentService) {
     return runner -> {
       System.out.println("clr2: Seeding students");
-
-      Student student = new Student("FirstSeedStudent", "Lim", "seed@email.com");
-      Student student2 = new Student("SecondSeedStudent", "Lim", "seed@email.com");
-
-      studentDAO.saveMany(student, student2);
+      studentService.createStudent("FirstSeedStudent", "Lim", "seed@email.com");
+      studentService.createStudent("SecondSeedStudent", "Lim", "seed@email.com");
     };
   }
 }
