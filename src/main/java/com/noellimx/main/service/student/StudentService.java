@@ -22,4 +22,25 @@ public class StudentService {
   public List<Student> getAll() {
     return studentDAO.getAll();
   }
+
+  @Transactional
+  public void createStudent(String fn, String ln, String email) {
+    studentDAO.save(new Student(fn, ln, email));
+  }
+
+  @Transactional
+  public List<Student> findByFirstAndLastName(String fn, String ln) {
+    return studentDAO.findByFirstAndLastName(fn, ln);
+  }
+
+  @Transactional
+  public Student getById(Integer id) {
+    return studentDAO.findById(id);
+  }
+
+
+  @Transactional
+  public void update(Student student) {
+    studentDAO.update(student);
+  }
 }

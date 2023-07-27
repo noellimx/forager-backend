@@ -37,6 +37,16 @@ public class StudentDAO {
   }
 
   @Transactional
+  public List<Student> findByFirstAndLastName(String fn, String ln) {
+    TypedQuery<Student> query = entityManager.createQuery(
+        "FROM Student WHERE lastName=:ln AND firstName=:fn",
+        Student.class);
+    query.setParameter("ln", ln);
+    query.setParameter("fn", fn);
+    return query.getResultList();
+  }
+
+  @Transactional
   public void update(Student student) {
     entityManager.merge(student);
   }
