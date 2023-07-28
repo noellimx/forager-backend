@@ -22,7 +22,7 @@ public class TestSecurityConfiguration {
 
 
   @Autowired
-  BasicSecurityProfile tsp;
+  BasicSecurityProfile basicSecurityProfile;
 
   @Bean
   public static PasswordEncoder passwordEncoder() {
@@ -33,8 +33,9 @@ public class TestSecurityConfiguration {
   @Bean
   public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
 
-    UserDetails testUser = User.builder().username(tsp.getUsername())
-        .password(passwordEncoder().encode(tsp.getPassword())).roles("USER", "ADMIN")
+    UserDetails testUser = User.builder().username(basicSecurityProfile.getUsername())
+        .password(passwordEncoder().encode(basicSecurityProfile.getPassword()))
+        .roles("USER", "ADMIN")
         .build();
 
     return new InMemoryUserDetailsManager(testUser);

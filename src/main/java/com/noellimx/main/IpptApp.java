@@ -1,10 +1,13 @@
 package com.noellimx.main;
 
+import com.noellimx.main.service.MyUserDetailsService;
 import com.noellimx.main.service.student.StudentService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @SpringBootApplication(scanBasePackages = {"com.noellimx.main",
     "com.noellimx.external"})
@@ -30,4 +33,24 @@ public class IpptApp {
       studentService.createStudent("SecondSeedStudent", "Lim", "seed@email.com");
     };
   }
+
+  @Bean
+  public CommandLineRunner seedUsers(MyUserDetailsService userDetailsService) {
+    return runner -> {
+      UserDetails user = User.builder()
+          .username("user")
+          .password("password1")
+          .roles("USER")
+          .build();
+      UserDetails admin = User.builder()
+          .username("admin")
+          .password("admin")
+          .roles("USER", "ADMIN")
+          .build();
+
+      userDetailsService.createUser(user);
+      userDetailsService.createUser(admin);
+    };
+  }
+
 }

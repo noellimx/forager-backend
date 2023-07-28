@@ -10,12 +10,12 @@ public class BasicSecurityProfile {
   @Value("${spring.security.user.name}")
   private String username;
 
+  @Value("${spring.security.user.password}")
+  private String password;
+
   public String getUsername() {
     return username;
   }
-
-  @Value("${spring.security.user.password}")
-  private String password;
 
   public String getPassword() {
     return password;
