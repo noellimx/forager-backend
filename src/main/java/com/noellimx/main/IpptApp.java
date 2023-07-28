@@ -8,7 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication(scanBasePackages = {"com.noellimx.main",
     "com.noellimx.external"})
@@ -39,18 +41,21 @@ public class IpptApp {
   public CommandLineRunner seedUsers(MyUserDetailsService userDetailsService,
       BasicSecurityProfile basicSecurityProfile) {
     return runner -> {
-      UserDetails user = User.builder()
+
+      UserBuilder builder = User.builder()
+          .passwordEncoder(pw -> new BCryptPasswordEncoder().encode(pw));
+      UserDetails user = builder
           .username("user")
           .password("password1")
           .roles("USER")
           .build();
-      UserDetails admin = User.builder()
+      UserDetails admin = builder
           .username("admin")
           .password("admin")
           .roles("ADMIN")
           .build();
 
-      UserDetails env_user = User.builder()
+      UserDetails env_user = builder
           .username(basicSecurityProfile.getUsername())
           .password(basicSecurityProfile.getPassword())
           .roles("USER", "ADMIN")
@@ -61,5 +66,4 @@ public class IpptApp {
       userDetailsService.createUser(env_user);
     };
   }
-
 }

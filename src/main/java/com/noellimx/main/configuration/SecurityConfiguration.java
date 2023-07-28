@@ -11,7 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -20,19 +20,20 @@ public class SecurityConfiguration {
 
   @Bean
   public PasswordEncoder passwordEncoder() {
-    return NoOpPasswordEncoder.getInstance();
+    return new BCryptPasswordEncoder();
   }
 
   @Bean
   @Autowired
   public AuthenticationManager authenticationManager(HttpSecurity http,
       MyUserDetailsService userDetailsService,
-      PasswordEncoder noOpPasswordEncoder)
+      PasswordEncoder bCryptPasswordEncoder)
       throws Exception {
     AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(
         AuthenticationManagerBuilder.class);
     authenticationManagerBuilder.userDetailsService(userDetailsService)
-        .passwordEncoder(noOpPasswordEncoder);
+        .passwordEncoder(bCryptPasswordEncoder);
+
     return authenticationManagerBuilder.build();
   }
 
