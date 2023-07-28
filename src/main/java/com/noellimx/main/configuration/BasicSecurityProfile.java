@@ -1,4 +1,4 @@
-package com.noellimx.main.test.config;
+package com.noellimx.main.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

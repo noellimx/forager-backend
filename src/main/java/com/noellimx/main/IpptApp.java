@@ -1,5 +1,6 @@
 package com.noellimx.main;
 
+import com.noellimx.main.configuration.BasicSecurityProfile;
 import com.noellimx.main.service.MyUserDetailsService;
 import com.noellimx.main.service.student.StudentService;
 import org.springframework.boot.CommandLineRunner;
@@ -35,7 +36,8 @@ public class IpptApp {
   }
 
   @Bean
-  public CommandLineRunner seedUsers(MyUserDetailsService userDetailsService) {
+  public CommandLineRunner seedUsers(MyUserDetailsService userDetailsService,
+      BasicSecurityProfile basicSecurityProfile) {
     return runner -> {
       UserDetails user = User.builder()
           .username("user")
@@ -45,11 +47,18 @@ public class IpptApp {
       UserDetails admin = User.builder()
           .username("admin")
           .password("admin")
+          .roles("ADMIN")
+          .build();
+
+      UserDetails env_user = User.builder()
+          .username(basicSecurityProfile.getUsername())
+          .password(basicSecurityProfile.getPassword())
           .roles("USER", "ADMIN")
           .build();
 
       userDetailsService.createUser(user);
       userDetailsService.createUser(admin);
+      userDetailsService.createUser(env_user);
     };
   }
 

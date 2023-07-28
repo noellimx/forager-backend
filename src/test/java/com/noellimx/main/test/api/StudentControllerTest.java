@@ -2,8 +2,7 @@ package com.noellimx.main.test.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.noellimx.main.test.config.BasicSecurityProfile;
-import com.noellimx.main.test.config.TestSecurityConfiguration;
+import com.noellimx.main.configuration.BasicSecurityProfile;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +20,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(OrderAnnotation.class)
-@Import({BasicSecurityProfile.class, TestSecurityConfiguration.class})
+@Import({BasicSecurityProfile.class})
 public class StudentControllerTest {
 
   private BasicSecurityProfile basicSecurityProfile;
