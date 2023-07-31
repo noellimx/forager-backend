@@ -4,7 +4,7 @@ package com.noellimx.main.service;
 import io.jsonwebtoken.Claims;
 import java.security.Key;
 import java.util.Date;
-import java.util.Map;
+import java.util.HashMap;
 import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +23,9 @@ public class JwtAuthService {
     this.key = appSignInKey;
   }
 
-  public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-    return this.tokenService.generateToken(extraClaims, userDetails, key);
+
+  public String generateToken(UserDetails userDetails) {
+    return this.tokenService.generateToken(new HashMap<>(), userDetails, key);
   }
 
   public <T> T _extractClaim(Claims claims, Function<Claims, T> claimsResolver) {
@@ -38,7 +39,7 @@ public class JwtAuthService {
   }
 
   public boolean _isTokenValid_isTokenExpired(Claims token) {
-    return _extractClaim(token, Claims::getExpiration).before(new Date());
+    return _extractClaim(token, Claims::getExpiration).after(new Date());
   }
 
   public String extractUsername(Claims claims) {
@@ -49,7 +50,8 @@ public class JwtAuthService {
     return extractUsername(extractAllClaims(token));
   }
 
-  private Claims extractAllClaims(String token) {
+  public Claims extractAllClaims(String token) {
+    System.out.println("key: " + key);
     return this.tokenService.extractAllClaimsFromToken(token, key);
   }
 }
