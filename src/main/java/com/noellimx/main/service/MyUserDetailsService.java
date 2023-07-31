@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class MyUserDetailsService implements UserDetailsManager {
 
-
   private UserRepository userRepository;
 
 
@@ -27,22 +26,13 @@ public class MyUserDetailsService implements UserDetailsManager {
   @Override
   public UserDetails loadUserByUsername(String username) {
 
-    System.out.println("UserService::loadUserByUsername executing findByUsername..." + username);
-
     com.noellimx.main.entity.User user = userRepository.findByUsername(username);
-    System.out.println("UserService::loadUserByUsername executed findByUsername...");
 
     if (user == null) {
-
-      System.out.println("UserService::loadUserByUsername failed to load user... user not found");
       throw new UsernameNotFoundException(username);
     }
 
-    System.out.println("UserService::loadUserByUsername loaded user...");
-    System.out.println(user);
-
     class A implements GrantedAuthority {
-
 
       String role;
 
