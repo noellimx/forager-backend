@@ -42,7 +42,7 @@ public class JwtAuthService {
   }
 
   public String extractUsername(Claims claims) {
-    return _extractClaim(claims, c -> c.getSubject());
+    return _extractClaim(claims, Claims::getSubject);
   }
 
   public String extractUsername(String token) {
@@ -50,6 +50,6 @@ public class JwtAuthService {
   }
 
   private Claims extractAllClaims(String token) {
-    return this.tokenService.extractAllClaims(token, key);
+    return this.tokenService.extractAllClaimsFromToken(token, key);
   }
 }

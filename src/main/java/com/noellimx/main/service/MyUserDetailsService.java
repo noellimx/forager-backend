@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MyUserDetailsService implements UserDetailsManager {
 
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
 
 
   @Autowired
@@ -34,7 +34,7 @@ public class MyUserDetailsService implements UserDetailsManager {
 
     class A implements GrantedAuthority {
 
-      String role;
+      final String role;
 
       public A(String auth) {
         this.role = auth;

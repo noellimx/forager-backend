@@ -77,8 +77,7 @@ public class StudentControllerTest {
       this.webTestClient
           .get()
           .uri("/students/" + tc.id)
-//          .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
-//              basicSecurityProfile.getPassword()))
+
           .exchange()
           .expectStatus().isOk().expectBody().consumeWith(response -> {
             String body = new String(response.getResponseBody(), StandardCharsets.UTF_8);
@@ -95,8 +94,7 @@ public class StudentControllerTest {
     this.webTestClient
         .get()
         .uri("/students/" + 9899)
-//        .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
-//            basicSecurityProfile.getPassword()))
+
         .exchange()
         .expectStatus().isNotFound().expectBody().jsonPath("$.message")
         .isEqualTo("Resource: Student not found")
@@ -174,8 +172,6 @@ public class StudentControllerTest {
     this.webTestClient
         .get()
         .uri("/students/invalid")
-//        .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
-//            basicSecurityProfile.getPassword()))
         .exchange()
         .expectStatus().is5xxServerError()
         .expectBody()
