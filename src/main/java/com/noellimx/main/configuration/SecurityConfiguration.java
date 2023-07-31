@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -36,12 +37,12 @@ public class SecurityConfiguration {
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable());
-//    http.httpBasic(Customizer.withDefaults());
+
 //    http.authorizeHttpRequests((authorizeHttpRequests) ->
-//        authorizeHttpRequests
-//            .requestMatchers(antMatcher(HttpMethod.PUT, "/**")).hasRole("USER")
-//            .anyRequest().authenticated()
+//        authorizeHttpRequests.anyRequest().authenticated()
 //    );
+
+    http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
     return http.build();
   }
 }
