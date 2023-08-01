@@ -18,18 +18,9 @@ public class Forager {
 
 
   @Bean
-  public CommandLineRunner clr1() {
-    return runner -> {
-      System.out.println("clr1: Beans should be loaded");
-    };
-  }
-
-  @Bean
   public CommandLineRunner seedStudents(StudentService studentService) {
     return runner -> {
-      System.out.println("clr2: Seeding students");
-      studentService.createStudent("FirstSeedStudent", "Lim", "seed@email.com");
-      studentService.createStudent("SecondSeedStudent", "Lim", "seed@email.com");
+
     };
   }
 

@@ -2,12 +2,16 @@ package com.noellimx.main.test.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.noellimx.main.service.student.StudentService;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,13 +22,24 @@ import org.springframework.web.reactive.function.BodyInserters;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(OrderAnnotation.class)
+@TestInstance(Lifecycle.PER_CLASS)
+
 public class StudentControllerTest {
 
   private WebTestClient webTestClient;
+  private StudentService ss;
 
   @Autowired
-  public StudentControllerTest(WebTestClient webTestClient) {
+  public StudentControllerTest(WebTestClient webTestClient, StudentService ss) {
     this.webTestClient = webTestClient;
+
+    this.ss = ss;
+  }
+
+  @BeforeAll
+  public void seed() {
+    ss.createStudent("FirstSeedStudent", "Lim", "seed@email.com");
+    ss.createStudent("SecondSeedStudent", "Lim", "seed@email.com");
   }
 
   @Test
