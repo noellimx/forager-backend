@@ -44,9 +44,6 @@ public class IntegrationTest {
     this.webTestClient
         .get()
         .uri("/defense")
-        .headers(headers -> headers.setBasicAuth(basicSecurityProfile.getUsername(),
-            basicSecurityProfile.getPassword()))
-//        .headers(headers -> headers.setBasicAuth("user", testSecurityConfig.getUserPassword()))
         .exchange()
         .expectStatus().isOk().returnResult(String.class).getResponseBody()
         .subscribe(responseBody -> {

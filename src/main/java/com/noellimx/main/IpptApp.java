@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication(scanBasePackages = {"com.noellimx.main",
     "com.noellimx.external"})
@@ -42,8 +41,8 @@ public class IpptApp {
       BasicSecurityProfile basicSecurityProfile) {
     return runner -> {
 
-      UserBuilder builder = User.builder()
-          .passwordEncoder(pw -> new BCryptPasswordEncoder().encode(pw));
+      UserBuilder builder = User.builder();
+//          .passwordEncoder(pw -> new BCryptPasswordEncoder().encode(pw));
       UserDetails user = builder
           .username("user")
           .password("password1")

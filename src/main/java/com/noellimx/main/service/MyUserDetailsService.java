@@ -1,5 +1,7 @@
 package com.noellimx.main.service;
 
+import com.noellimx.main.entity.AppUser;
+import com.noellimx.main.exception.controller.NotFoundException;
 import com.noellimx.main.respository.UserRepository;
 import jakarta.transaction.Transactional;
 import java.util.Arrays;
@@ -26,7 +28,7 @@ public class MyUserDetailsService implements UserDetailsManager {
   @Override
   public UserDetails loadUserByUsername(String username) {
 
-    com.noellimx.main.entity.User user = userRepository.findByUsername(username);
+    AppUser user = userRepository.findByUsername(username);
 
     if (user == null) {
       throw new UsernameNotFoundException(username);
@@ -54,8 +56,6 @@ public class MyUserDetailsService implements UserDetailsManager {
         true,
         Arrays.asList(role3, role4));
 
-    System.out.println("UserService::loadUserByUsername convert to user details success...");
-    System.out.println(userDetails);
     return userDetails;
   }
 
@@ -63,10 +63,31 @@ public class MyUserDetailsService implements UserDetailsManager {
   @Transactional
   public void createUser(UserDetails userDetails) {
     System.out.println("UserService::createUser");
-    com.noellimx.main.entity.User user = new com.noellimx.main.entity.User(
+    AppUser user = new AppUser(
         userDetails.getUsername(),
         userDetails.getPassword());
     userRepository.save(user);
+  }
+
+  @Transactional
+  public UserDetails authenticateUser(UserDetails userDetails) {
+
+    AppUser user = userRepository.findByUsername(userDetails.getUsername());
+
+    user = userRepository.findByUsernameAndPassword(userDetails.getUsername(),
+        userDetails.getPassword());
+
+    if (user == null) {
+
+      throw new NotFoundException("User and password not match.");
+    }
+
+    System.out.println(
+        "authenticateUser..... pw matches" + userDetails.getPassword() + user.getPassword());
+
+    return new User(user.getUsername(), "", true, true, true,
+        true,
+        Arrays.asList());
   }
 
   @Override
