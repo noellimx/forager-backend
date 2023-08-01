@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(scanBasePackages = {"com.noellimx.main",
     "com.noellimx.external"})
-public class IpptApp {
+public class Forager {
 
   public static void main(String[] args) {
-    SpringApplication.run(IpptApp.class, args);
+    SpringApplication.run(Forager.class, args);
   }
 
 
