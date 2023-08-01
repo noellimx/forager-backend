@@ -78,8 +78,7 @@ public class MyUserDetailsService implements UserDetailsManager {
         userDetails.getPassword());
 
     if (user == null) {
-
-      throw new NotFoundException("User and password not match.");
+      throw new NotFoundException("User and password pair not found.");
     }
 
     System.out.println(
