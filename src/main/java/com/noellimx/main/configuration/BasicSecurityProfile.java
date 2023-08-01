@@ -3,7 +3,6 @@ package com.noellimx.main.configuration;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -22,20 +21,5 @@ public class BasicSecurityProfile {
   public static Key signInKey(String keyString) {
     byte[] key = Decoders.BASE64.decode(keyString);
     return Keys.hmacShaKeyFor(key);
-  }
-  
-
-  @Value("${spring.security.user.name}")
-  private String username;
-
-  @Value("${spring.security.user.password}")
-  private String password;
-
-  public String getUsername() {
-    return username;
-  }
-
-  public String getPassword() {
-    return password;
   }
 }

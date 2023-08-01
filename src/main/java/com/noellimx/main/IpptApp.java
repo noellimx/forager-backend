@@ -7,9 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.User.UserBuilder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @SpringBootApplication(scanBasePackages = {"com.noellimx.main",
     "com.noellimx.external"})
@@ -41,28 +38,6 @@ public class IpptApp {
       BasicSecurityProfile basicSecurityProfile) {
     return runner -> {
 
-      UserBuilder builder = User.builder();
-//          .passwordEncoder(pw -> new BCryptPasswordEncoder().encode(pw));
-      UserDetails user = builder
-          .username("user")
-          .password("password1")
-          .roles("USER")
-          .build();
-      UserDetails admin = builder
-          .username("admin")
-          .password("admin")
-          .roles("ADMIN")
-          .build();
-
-      UserDetails env_user = builder
-          .username(basicSecurityProfile.getUsername())
-          .password(basicSecurityProfile.getPassword())
-          .roles("USER", "ADMIN")
-          .build();
-
-      userDetailsService.createUser(user);
-      userDetailsService.createUser(admin);
-      userDetailsService.createUser(env_user);
     };
   }
 }

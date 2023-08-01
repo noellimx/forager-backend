@@ -1,6 +1,5 @@
 package com.noellimx.main.test.api;
 
-import com.noellimx.main.configuration.BasicSecurityProfile;
 import com.noellimx.main.controllers.rest.auth.bodytype.response.AuthenticatedResponse;
 import com.noellimx.main.test.utils.SerialGenerator;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -20,19 +18,16 @@ import org.springframework.web.reactive.function.BodyInserters;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(OrderAnnotation.class)
-@Import({BasicSecurityProfile.class})
 public class AuthControllerTest {
 
-  private BasicSecurityProfile basicSecurityProfile;
 
   private WebTestClient webTestClient;
 
   SerialGenerator serialGenerator = new SerialGenerator();
 
   @Autowired
-  public AuthControllerTest(BasicSecurityProfile testSecurityConfig,
+  public AuthControllerTest(
       WebTestClient webTestClient) {
-    this.basicSecurityProfile = testSecurityConfig;
     this.webTestClient = webTestClient;
   }
 
@@ -113,8 +108,5 @@ public class AuthControllerTest {
         .expectStatus().isOk().expectBody(AuthenticatedResponse.class)
         .returnResult()
         .getResponseBody();
-
-//    System.out.println("authresponse " + response);
-
   }
 }

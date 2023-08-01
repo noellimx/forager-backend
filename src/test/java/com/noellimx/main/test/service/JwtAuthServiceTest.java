@@ -24,7 +24,6 @@ public class JwtAuthServiceTest {
 
   private static final String testKey = "fb8e20fc2e4c3f248c60c39bd652f3c1347298bb977b8b4d5903b85055620603";
 
-
   @Autowired
   public JwtAuthServiceTest(JwtTokenService tokenService) {
     this.service = new JwtAuthService(tokenService, BasicSecurityProfile.signInKey(testKey));
@@ -57,7 +56,7 @@ public class JwtAuthServiceTest {
     String token = this.service.generateToken(userDetails);
     JwtAuthService anotherService = new JwtAuthService(tokenService, BasicSecurityProfile.signInKey(
         "b05efba3cb00bbb571bc6616e14963250017729bd07863c8d981ac342ba0da92"));
-    
+
     Assertions.assertThrows(SignatureException.class, () -> anotherService.isTokenValid(token));
   }
 
