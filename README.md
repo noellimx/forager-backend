@@ -14,7 +14,8 @@ The default profile is disabled.
 
 ### Persistence Strategy
 
-- Development: Require sql service to be up before application runs.
+- Development: Connection pool will attempt to get available connection. Error is thrown if
+  connection is not established after timeout.
 - Test: Use H2 database.
 - Production: Manual update via script. (Work in progress).
 
@@ -30,11 +31,18 @@ development server: `./mvnw spring-boot:run -Dspring-boot.run.profiles=dev`
 
 #### Release
 
-Test with test environment before packaging.
+Test with test environment before packaging:
 
 ```
 #/bin/bash
 ./mvnw -Dspring.profiles.active=test package
+```
+
+Package without test:
+
+```
+#/bin/bash
+./mvnw -DskipTests=true package
 ```
 
 #### useful commands
