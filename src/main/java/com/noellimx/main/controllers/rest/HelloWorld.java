@@ -15,7 +15,7 @@ public class HelloWorld {
 
   @GetMapping("/")
   public String sayHello() {
-    return "Hello at / " + venus.some() + "1691510686";
+    return "Hello at / " + venus.some() + "bagrocketglidebus";
   }
 
   @GetMapping("/world")
