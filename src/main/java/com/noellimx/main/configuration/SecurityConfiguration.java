@@ -23,7 +23,7 @@ public class SecurityConfiguration {
 
     http.authorizeHttpRequests((authorizeHttpRequests) ->
         authorizeHttpRequests
-            .requestMatchers("/auth").permitAll()
+            .requestMatchers("/food-establishment").authenticated()
             .anyRequest().permitAll()
     );
 

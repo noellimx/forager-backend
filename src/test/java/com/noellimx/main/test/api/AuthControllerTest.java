@@ -77,7 +77,7 @@ public class AuthControllerTest {
   }
 
   @Test
-  @Order(2)
+  @Order(3)
   public void ShouldReturnOK_WithToken_RegisterAndLogin() {
 
     String username = "testuserreglogin" + serialGenerator.next();
