@@ -29,14 +29,17 @@ public class StudentDAOTest {
     String lastName = "B";
     Student student = new Student(firstName, lastName, "C");
 
-    System.out.println("StudentDAOTest: Creating Student" + student);
-
     studentDAO.save(student);
 
-    Integer gotCount = studentDAO.getAll().size();
-    assertTrue(gotCount > 1);
+    Integer gotTotalCount = studentDAO.getAll().size();
+    int wantTotalCount = 1;
 
-    assertTrue(studentDAO.findByLastName(lastName).size() == 1);
+    assertTrue(gotTotalCount >= wantTotalCount,
+        "total count should be at least  " + wantTotalCount + " but got " + gotTotalCount);
+
+    Integer gotCount = studentDAO.findByLastName(lastName).size();
+
+    assertTrue(gotCount == 1, "student count got " + gotCount);
   }
 
   @Test

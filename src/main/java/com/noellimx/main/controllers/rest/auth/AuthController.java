@@ -23,7 +23,6 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/auth")
 public class AuthController {
 
-
   JwtAuthService jwtAuthService;
 
   MyUserDetailsService uds;
@@ -44,7 +43,7 @@ public class AuthController {
     UserDetails userDetails = User.builder().username(form.username).password(form.password)
         .build();
     this.uds.createUser(userDetails);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.status(201).build();
   }
 
   @PostMapping("/authenticate")

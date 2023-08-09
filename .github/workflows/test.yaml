@@ -1,0 +1,15 @@
+name: Publish Docker image
+
+on:
+  pull_request:
+
+jobs:
+  run_test:
+    name: Run test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: test
+        run: docker build . --file test.Dockerfile
+

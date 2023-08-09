@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: forager
+  version: 1.0.0
+  description: API for user operations
+
+components:
+  schemas:
+    UserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: User's username
+        password:
+          type: string
+          description: User's password
+    RegisterUserRequest:
+      $ref: '#/components/schemas/UserRequest'
+    AuthenticateUserRequest:
+      $ref: '#/components/schemas/UserRequest'
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: authentication token
+
+paths:
+  /auth/register:
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+      responses:
+        '201':
+          description: User created successfully
+  /auth/authenticate:
+    post:
+      summary: Obtain token credentials given username and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticateUserRequest'
+      responses:
+        '200':
+          description: Token obtained successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Token not obtained. Credentials not matched.

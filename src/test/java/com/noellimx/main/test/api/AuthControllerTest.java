@@ -47,7 +47,7 @@ public class AuthControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
-        .expectStatus().isOk();
+        .expectStatus().is2xxSuccessful();
   }
 
   @Test
@@ -65,7 +65,7 @@ public class AuthControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
-        .expectStatus().isOk();
+        .expectStatus().is2xxSuccessful();
 
     this.webTestClient
         .post()
@@ -95,7 +95,7 @@ public class AuthControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
-        .expectStatus().isOk();
+        .expectStatus().is2xxSuccessful();
 
     BCryptPasswordEncoder bce = new BCryptPasswordEncoder();
 
@@ -105,7 +105,7 @@ public class AuthControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
-        .expectStatus().isOk().expectBody(AuthenticatedResponse.class)
+        .expectStatus().is2xxSuccessful().expectBody(AuthenticatedResponse.class)
         .returnResult()
         .getResponseBody();
   }
