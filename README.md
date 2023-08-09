@@ -1,5 +1,9 @@
 # Application
 
+## OpenAPI docs
+
+`./openapi`
+
 # Development Notes
 
 ## Configuration and Profiles
@@ -14,10 +18,11 @@ The default profile is disabled.
 
 ### Persistence Strategy
 
-- Development: Connection pool will attempt to get available connection. Error is thrown if
-  connection is not established after timeout.
+[See database repository for more information](https://github.com/noellimx/forager-database)
+
+- Development: Supply connection string to database. Connection pool will attempt to get available
+  connection. This application is configured not to crash when connection is unstable.
 - Test: Use H2 database.
-- Production: Manual update via script. (Work in progress).
 
 Template for configuration:
 `target/classes/application-prod-template.properties`
@@ -29,7 +34,7 @@ development server: `./run-dev.sh`
 
 ### production
 
-#### Release
+#### Packaging
 
 Test with test environment before packaging:
 
@@ -44,6 +49,14 @@ Package without test:
 #/bin/bash
 ./mvnw -DskipTests=true package
 ```
+
+or with container:
+
+```docker build .```
+
+#### Release
+
+Refer `.github/workflows/publish-image.yaml` for hook to create GitHub release.
 
 #### drawio
 
