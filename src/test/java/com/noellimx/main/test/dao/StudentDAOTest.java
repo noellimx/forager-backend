@@ -1,10 +1,11 @@
-package com.noellimx.main.dao;
+package com.noellimx.main.test.dao;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.noellimx.main.dao.StudentDAO;
 import com.noellimx.main.entity.Student;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -22,7 +23,6 @@ public class StudentDAOTest {
 
   @Test
   @Order(1)
-
   public void ShouldExist() {
 
     String firstName = "A";
@@ -44,14 +44,17 @@ public class StudentDAOTest {
 
   @Test
   @Order(2)
-
   public void ShouldUpdate() {
 
-    Student student = studentDAO.findById(1);
+    Student student = studentDAO.findByLastName("B").get(0);
+
+    int id = student.getId();
+
+    System.out.println("ShouldUpdateDAO id " + id);
     student.setLastName("NEWB");
     studentDAO.update(student);
 
-    student = studentDAO.findById(1);
+    student = studentDAO.findById(id);
 
     assertEquals("NEWB", student.getLastName());
 
@@ -60,9 +63,11 @@ public class StudentDAOTest {
   @Test
   @Order(3)
   public void ShouldDelete() {
-    Student student = studentDAO.findById(1);
-    studentDAO.removeById(student.getId());
-    student = studentDAO.findById(1);
+
+    Student student = studentDAO.findByLastName("NEWB").get(0);
+    int id = student.getId();
+    studentDAO.removeById(id);
+    student = studentDAO.findById(id);
     assertNull(student);
   }
 
