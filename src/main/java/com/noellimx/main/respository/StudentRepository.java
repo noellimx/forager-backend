@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 
-  public List<Student> findByFirstNameAndLastName(String ln, String fn);
+  List<Student> findByFirstNameAndLastName(String ln, String fn);
 
 }

@@ -39,7 +39,7 @@ public class StudentDAOTest {
 
     Integer gotCount = studentDAO.findByLastName(lastName).size();
 
-    assertTrue(gotCount == 1, "student count got " + gotCount);
+    assertEquals(1, (int) gotCount, "student count got " + gotCount);
   }
 
   @Test
@@ -76,6 +76,6 @@ public class StudentDAOTest {
   public void ShouldDeleteAll() {
     studentDAO.removeAll();
     Integer gotCount = studentDAO.getAll().size();
-    assertTrue(gotCount == 0);
+    assertEquals(0, (int) gotCount);
   }
 }

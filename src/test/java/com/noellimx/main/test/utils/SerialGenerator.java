@@ -5,7 +5,7 @@ import java.util.Random;
 public class SerialGenerator {
 
 
-  private Random ran = new Random();
+  private final Random ran = new Random();
 
 
   public Integer next() {

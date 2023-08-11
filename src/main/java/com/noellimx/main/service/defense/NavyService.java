@@ -11,7 +11,7 @@ public class NavyService implements Service {
 
 
   private static int instanceId = 0;
-  private int id;
+  private final int id;
 
   public NavyService() {
     this.id = instanceId;
