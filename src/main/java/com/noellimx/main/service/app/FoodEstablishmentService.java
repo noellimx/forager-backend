@@ -17,7 +17,7 @@ public class FoodEstablishmentService {
 
 
   private static void prevalidate(FoodEstablishment input) {
-    if (input.getSfaLicenseNo().length() != 6) {
+    if (input.getSfaLicenseNo() == "") {
       throw new RuntimeException("CreateValidator fail: postal code size inexact");
     }
   }
