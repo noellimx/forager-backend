@@ -23,7 +23,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 @TestMethodOrder(OrderAnnotation.class)
 public class CreatingFoodEstablishmentTest {
 
-  private WebTestClient webTestClient;
+  private final WebTestClient webTestClient;
 
   private static String token;
 
@@ -65,7 +65,7 @@ public class CreatingFoodEstablishmentTest {
         .returnResult()
         .getResponseBody();
 
-    this.token = response.token;
+    token = response.token;
   }
 
 
@@ -80,7 +80,7 @@ public class CreatingFoodEstablishmentTest {
 
     FoodEstablishmentForm form = this.webTestClient
         .post()
-        .uri("/food-establishment/").headers(h -> h.set("Authorization", "Bearer " + this.token))
+        .uri("/food-establishment/").headers(h -> h.set("Authorization", "Bearer " + token))
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
