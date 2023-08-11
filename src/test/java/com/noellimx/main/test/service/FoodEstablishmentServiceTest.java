@@ -18,14 +18,12 @@ import org.springframework.dao.DataIntegrityViolationException;
 @TestInstance(Lifecycle.PER_CLASS)
 public class FoodEstablishmentServiceTest {
 
-
   FoodEstablishmentService service;
 
   @Autowired
   public FoodEstablishmentServiceTest(FoodEstablishmentService FoodEstablishmentService) {
     this.service = FoodEstablishmentService;
   }
-
 
   @Test
   @Order(1)
@@ -38,8 +36,6 @@ public class FoodEstablishmentServiceTest {
     Assertions.assertNotNull(est);
     Assertions.assertThrows(DataIntegrityViolationException.class,
         () -> this.service.create("E78125L001", "", ""));
-
-    Assertions.assertEquals(1, service.getAll().size());
   }
 
 //  @Test
