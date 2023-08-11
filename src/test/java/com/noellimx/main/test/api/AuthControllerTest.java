@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
@@ -96,8 +95,6 @@ public class AuthControllerTest {
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
         .expectStatus().is2xxSuccessful();
-
-    BCryptPasswordEncoder bce = new BCryptPasswordEncoder();
 
     AuthenticatedResponse response = this.webTestClient
         .post()

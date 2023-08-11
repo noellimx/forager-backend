@@ -2,9 +2,11 @@ package com.noellimx.main.test.api.integration;
 
 
 import com.noellimx.main.controllers.rest.auth.bodytype.response.AuthenticatedResponse;
+import com.noellimx.main.controllers.rest.foodestablishment.bodytype.request.FoodEstablishmentForm;
 import com.noellimx.main.test.utils.SerialGenerator;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -20,7 +22,6 @@ import org.springframework.web.reactive.function.BodyInserters;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(OrderAnnotation.class)
 public class CreatingFoodEstablishmentTest {
-
 
   private WebTestClient webTestClient;
 
@@ -63,7 +64,6 @@ public class CreatingFoodEstablishmentTest {
         .expectStatus().is2xxSuccessful().expectBody(AuthenticatedResponse.class)
         .returnResult()
         .getResponseBody();
-    System.out.println("response obtained is " + response);
 
     this.token = response.token;
   }
@@ -71,17 +71,25 @@ public class CreatingFoodEstablishmentTest {
 
   @Test
   @Order(2)
-  public void ShouldReturnNotImplemented_GivenToken_WhenCreatingFoodEstablishment() {
-
-    System.out.println("token currently is " + this.token);
+  public void ShouldReturnOK_GivenToken_WhenCreatingFoodEstablishment() {
     Map<String, String> bodyMap = new HashMap<>();
 
-    this.webTestClient
+    bodyMap.put("sfa_license_no", "E78127L003");
+    bodyMap.put("postal_code_official", "");
+    bodyMap.put("business_name", "DE FU SEAFOOD (NUC 59) PTE LTD");
+
+    FoodEstablishmentForm form = this.webTestClient
         .post()
         .uri("/food-establishment/").headers(h -> h.set("Authorization", "Bearer " + this.token))
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
-        .expectStatus().isEqualTo(HttpStatus.NOT_IMPLEMENTED);
+        .expectStatus().isEqualTo(HttpStatus.NOT_IMPLEMENTED)
+        .expectBody(FoodEstablishmentForm.class)
+        .returnResult()
+        .getResponseBody();
+
+    Assertions.assertEquals("E78127L003", form.sfa_license_no);
+
   }
 }
