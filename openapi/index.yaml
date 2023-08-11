@@ -5,6 +5,12 @@ info:
   description: API for user operations
 
 components:
+  securitySchemes:
+    tokenHeader:
+      type: http
+      in: header
+      name: Authorization
+      description: authentication token in request
   schemas:
     UserRequest:
       type: object
@@ -26,6 +32,30 @@ components:
           type: string
           description: authentication token
 
+    FoodEstablishmentRequest:
+      type: object
+      properties:
+        sfa_license_no:
+          type: string
+          description: license number issued by authorities
+        postal_code_official:
+          type: string
+          description: location by postal code
+        business_name:
+          type: string
+          description: registered business name
+    FoodEstablishment:
+      type: object
+      properties:
+        sfa_license_no:
+          type: string
+          description: license number issued by authorities
+        postal_code_official:
+          type: string
+          description: location by postal code
+        business_name:
+          type: string
+          description: registered business name
 paths:
   /auth/register:
     post:
@@ -57,3 +87,36 @@ paths:
                 $ref: '#/components/schemas/TokenResponse'
         '401':
           description: Token not obtained. Credentials not matched.
+  /establishment:
+    post:
+      summary: Create a food establishment
+      security:
+        - tokenHeader: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodEstablishmentRequest'
+      responses:
+        '201':
+          description: Food establishment created successfully
+  /establishment/all:
+    post:
+      summary: Get establishment
+      security:
+        - tokenHeader: [ ]
+      responses:
+        '200':
+          description: Food establishment get all successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FoodEstablishmentRequest'
+                  message:
+                    type: string

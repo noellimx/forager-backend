@@ -52,7 +52,7 @@ Package without test:
 
 or with container:
 
-```docker build .```
+```docker build . -f test.Dockerfile```
 
 #### Release
 
