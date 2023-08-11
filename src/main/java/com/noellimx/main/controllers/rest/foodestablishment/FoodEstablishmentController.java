@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/food-establishment")
 public class FoodEstablishmentController {
 
-
   FoodEstablishmentService foodEstablishmentService;
 
   @Autowired
@@ -37,6 +36,4 @@ public class FoodEstablishmentController {
         foodEstablishmentService.getAll(), "");
     return response;
   }
-
-
 }
