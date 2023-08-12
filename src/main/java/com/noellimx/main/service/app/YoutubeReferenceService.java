@@ -55,12 +55,16 @@ public class YoutubeReferenceService {
   }
 
   @Transactional
-  public void create(String videoId, String sfaLicenseNo,
+  public YoutubeReference create(String videoId, String sfaLicenseNo,
       String timestamp, String username) {
     YoutubeReference est = new YoutubeReference(videoId, sfaLicenseNo, timestamp, username);
 
     System.out.println("UService: " + est);
     prevalidate(est);
-    repo.save(est);
+
+    YoutubeReference s = repo.save(est);
+    System.out.println("UService after save: " + s);
+
+    return s;
   }
 }

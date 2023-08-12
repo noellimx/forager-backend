@@ -31,8 +31,8 @@ public class YoutubeReference {
   @Column(name = "timestamp", nullable = false)
   private String timestamp;
 
-  @Column(name = "username")
-  private String username;
+  @Column(name = "creator_name")
+  private String creator_name;
 
   public YoutubeReference() {
   }
@@ -42,7 +42,47 @@ public class YoutubeReference {
     this.videoId = videoId;
     this.sfaLicenseNo = sfaLicenseNo;
     this.timestamp = timestamp;
-    this.username = username;
+    this.creator_name = username;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public String getVideoId() {
+    return videoId;
+  }
+
+  public void setVideoId(String videoId) {
+    this.videoId = videoId;
+  }
+
+  public String getSfaLicenseNo() {
+    return sfaLicenseNo;
+  }
+
+  public void setSfaLicenseNo(String sfaLicenseNo) {
+    this.sfaLicenseNo = sfaLicenseNo;
+  }
+
+  public String getTimestamp() {
+    return timestamp;
+  }
+
+  public void setTimestamp(String timestamp) {
+    this.timestamp = timestamp;
+  }
+
+  public String getCreatorName() {
+    return creator_name;
+  }
+
+  public void setCreatorName(String creator_name) {
+    this.creator_name = creator_name;
   }
 
   @Override
@@ -52,7 +92,7 @@ public class YoutubeReference {
         ", videoId='" + videoId + '\'' +
         ", sfaLicenseNo='" + sfaLicenseNo + '\'' +
         ", timestamp='" + timestamp + '\'' +
-        ", username='" + username + '\'' +
+        ", creatorName='" + creator_name + '\'' +
         '}';
   }
 }
