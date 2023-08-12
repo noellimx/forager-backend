@@ -71,7 +71,6 @@ public class YoutubeReferenceControllerTest {
         .returnResult()
         .getResponseBody();
 
-    System.out.println("asdasdasd" + ref);
     Assertions.assertEquals("LLLL003", ref.getSfaLicenseNo());
     Assertions.assertEquals("v123", ref.getVideoId());
     Assertions.assertEquals("t123", ref.getTimestamp());

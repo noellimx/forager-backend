@@ -32,8 +32,6 @@ public class YoutubeReferenceController {
 
     UserDetails user = (UserDetails) a.getPrincipal();
 
-    System.out.println("YoutubeReferenceController::create " + user.getUsername());
-
     YoutubeReference ref = service.create(form.videoId, form.sfaLicenseNo,
         form.timestamp, user.getUsername());
 

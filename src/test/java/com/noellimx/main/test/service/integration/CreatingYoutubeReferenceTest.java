@@ -43,11 +43,9 @@ public class CreatingYoutubeReferenceTest {
     String password = "pwtestuser001";
     UserDetails user = User.builder().username(username).password(password).build();
     this.userService.createUser(user);
-    String token = this.jwtAuthService.generateToken(user);
 
     outletService.create("LICENCSE", "123456", "ABC");
 
     YoutubeReference ref = youtubeReference.create("v123", "LICENCSE", "123", username);
-    System.out.println("testcreateoutlet " + ref);
   }
 }

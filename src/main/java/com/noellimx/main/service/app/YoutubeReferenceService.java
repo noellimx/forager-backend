@@ -59,11 +59,9 @@ public class YoutubeReferenceService {
       String timestamp, String username) {
     YoutubeReference est = new YoutubeReference(videoId, sfaLicenseNo, timestamp, username);
 
-    System.out.println("UService: " + est);
     prevalidate(est);
 
     YoutubeReference s = repo.save(est);
-    System.out.println("UService after save: " + s);
 
     return s;
   }
