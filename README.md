@@ -61,4 +61,3 @@ Refer `.github/workflows/publish-image.yaml` for hook to create GitHub release.
 #### drawio
 
 [Setup](https://drive.google.com/file/d/1yd69Ey0j-RO6ZtIPW1xFuWCbe2JokwJt/view?usp=sharing)
-

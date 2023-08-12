@@ -18,8 +18,8 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @TestInstance(Lifecycle.PER_CLASS)
 public class FoodEstablishmentControllerTest {
 
-  private final WebTestClient webTestClient;
-  private final FoodEstablishmentService ss;
+  private WebTestClient webTestClient;
+  private FoodEstablishmentService ss;
 
   @Autowired
   public FoodEstablishmentControllerTest(WebTestClient webTestClient, FoodEstablishmentService ss) {
@@ -43,7 +43,7 @@ public class FoodEstablishmentControllerTest {
         .expectStatus().isOk().expectBody();
 //
     // COMMENTING OUT BELOW: failing on pipeline.
-
+    
 //    .consumeWith(response -> {
 //      String body = new String(response.getResponseBody(), StandardCharsets.UTF_8);
 //      assertEquals(body,

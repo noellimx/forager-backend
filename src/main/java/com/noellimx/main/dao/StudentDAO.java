@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class StudentDAO {
 
-  private final EntityManager entityManager;
+  private EntityManager entityManager;
 
 
   @Autowired

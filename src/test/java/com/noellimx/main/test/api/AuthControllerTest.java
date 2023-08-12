@@ -20,7 +20,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 public class AuthControllerTest {
 
 
-  private final WebTestClient webTestClient;
+  private WebTestClient webTestClient;
 
   SerialGenerator serialGenerator = new SerialGenerator();
 

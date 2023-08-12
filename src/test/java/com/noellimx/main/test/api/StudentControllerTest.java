@@ -26,8 +26,8 @@ import org.springframework.web.reactive.function.BodyInserters;
 
 public class StudentControllerTest {
 
-  private final WebTestClient webTestClient;
-  private final StudentService ss;
+  private WebTestClient webTestClient;
+  private StudentService ss;
 
   @Autowired
   public StudentControllerTest(WebTestClient webTestClient, StudentService ss) {
@@ -63,8 +63,8 @@ public class StudentControllerTest {
 
     class TestCase {
 
-      final Integer id;
-      final String wantResponseBody;
+      Integer id;
+      String wantResponseBody;
 
       public TestCase(Integer id, String wantResponseBody) {
         this.id = id;
@@ -115,8 +115,8 @@ public class StudentControllerTest {
 
     class TestCase {
 
-      final String wantResponseBody;
-      final String requestBody;
+      String wantResponseBody;
+      String requestBody;
 
       public TestCase(String wantResponseBody, String requestBody) {
         this.requestBody = requestBody;

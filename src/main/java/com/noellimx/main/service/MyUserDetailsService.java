@@ -5,7 +5,6 @@ import com.noellimx.main.exception.controller.NotFoundException;
 import com.noellimx.main.respository.UserRepository;
 import jakarta.transaction.Transactional;
 import java.util.Arrays;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -87,7 +86,7 @@ public class MyUserDetailsService implements UserDetailsManager {
 
     return new User(user.getUsername(), "", true, true, true,
         true,
-        List.of());
+        Arrays.asList());
   }
 
   @Override
