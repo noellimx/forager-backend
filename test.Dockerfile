@@ -6,4 +6,4 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
-RUN ./mvnw -Dspring.profiles.active=test test
+RUN ./mvnw -Dspring.profiles.active=test -ntp test

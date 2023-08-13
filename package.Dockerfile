@@ -6,7 +6,7 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
-RUN ./mvnw package -DskipTests=true
+RUN ./mvnw package -DskipTests=true -ntp
 
 FROM eclipse-temurin:17-jdk-alpine
 VOLUME /tmp
