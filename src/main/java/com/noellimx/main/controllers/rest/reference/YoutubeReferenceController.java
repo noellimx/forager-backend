@@ -5,7 +5,6 @@ import com.noellimx.main.controllers.rest.reference.bodytype.request.YoutubeRefe
 import com.noellimx.main.controllers.rest.utils.JsonResponse;
 import com.noellimx.main.entity.YoutubeReference;
 import com.noellimx.main.service.app.YoutubeReferenceService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/reference/youtube")
 public class YoutubeReferenceController {
 
-  YoutubeReferenceService service;
+  final YoutubeReferenceService service;
 
   @Autowired
   public YoutubeReferenceController(YoutubeReferenceService service) {
@@ -42,8 +41,7 @@ public class YoutubeReferenceController {
 
   @GetMapping("/all")
   public JsonResponse getAll() {
-    JsonResponse<List<YoutubeReference>> response = new JsonResponse<>(
+    return new JsonResponse<>(
         service.getAll(), "");
-    return response;
   }
 }

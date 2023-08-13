@@ -31,13 +31,13 @@ public class StudentDAOTest {
 
     studentDAO.save(student);
 
-    Integer gotTotalCount = studentDAO.getAll().size();
+    int gotTotalCount = studentDAO.getAll().size();
     int wantTotalCount = 1;
 
     assertTrue(gotTotalCount >= wantTotalCount,
         "total count should be at least  " + wantTotalCount + " but got " + gotTotalCount);
 
-    Integer gotCount = studentDAO.findByLastName(lastName).size();
+    int gotCount = studentDAO.findByLastName(lastName).size();
 
     assertEquals(1, (int) gotCount, "student count got " + gotCount);
   }
@@ -75,7 +75,7 @@ public class StudentDAOTest {
   @Order(4)
   public void ShouldDeleteAll() {
     studentDAO.removeAll();
-    Integer gotCount = studentDAO.getAll().size();
+    int gotCount = studentDAO.getAll().size();
     assertEquals(0, (int) gotCount);
   }
 }

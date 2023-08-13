@@ -16,14 +16,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 @SpringBootTest
 public class CreatingYoutubeReferenceTest {
 
-  MyUserDetailsService userService;
+  final MyUserDetailsService userService;
 
-  JwtAuthService jwtAuthService;
-  FoodEstablishmentService outletService;
+  final JwtAuthService jwtAuthService;
+  final FoodEstablishmentService outletService;
 
-  YoutubeReferenceService youtubeReference;
+  final YoutubeReferenceService youtubeReference;
 
-  SerialGenerator serialGenerator = new SerialGenerator();
+  final SerialGenerator serialGenerator = new SerialGenerator();
 
 
   @Autowired

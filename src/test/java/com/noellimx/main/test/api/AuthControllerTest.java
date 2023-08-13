@@ -22,7 +22,7 @@ public class AuthControllerTest {
 
   private final WebTestClient webTestClient;
 
-  SerialGenerator serialGenerator = new SerialGenerator();
+  final SerialGenerator serialGenerator = new SerialGenerator();
 
   @Autowired
   public AuthControllerTest(

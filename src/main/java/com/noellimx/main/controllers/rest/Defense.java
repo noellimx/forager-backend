@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/defense")
 public class Defense {
 
-  Service defenseService;
-  Service defenseService2;
+  final Service defenseService;
+  final Service defenseService2;
 
-  Service airService;
+  final Service airService;
 
   @Autowired
   public Defense(@Qualifier("navyService") Service navyService1,

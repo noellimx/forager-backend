@@ -27,7 +27,7 @@ public class CreatingFoodEstablishmentTest {
 
   private static String token;
 
-  SerialGenerator serialGenerator = new SerialGenerator();
+  final SerialGenerator serialGenerator = new SerialGenerator();
 
   @Autowired
   public CreatingFoodEstablishmentTest(

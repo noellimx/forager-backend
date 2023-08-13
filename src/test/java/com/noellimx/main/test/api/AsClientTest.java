@@ -12,10 +12,6 @@ public class AsClientTest {
   @Autowired
   private WebTestClient webTestClient;
 
-  @Test
-  public void contextLoads() {
-
-  }
 
   @Test
   public void ShouldReturn404() {

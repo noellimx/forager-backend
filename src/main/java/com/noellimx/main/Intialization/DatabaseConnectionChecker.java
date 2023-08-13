@@ -18,7 +18,7 @@ public class DatabaseConnectionChecker implements ApplicationRunner {
   }
 
   @Override
-  public void run(ApplicationArguments args) throws Exception {
+  public void run(ApplicationArguments args) {
     try (Connection connection = dataSource.getConnection()) {
       // If the connection is successful, do nothing
       System.out.println("Info: Database connection success.");

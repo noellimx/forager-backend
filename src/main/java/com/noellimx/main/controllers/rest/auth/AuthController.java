@@ -23,11 +23,11 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/auth")
 public class AuthController {
 
-  JwtAuthService jwtAuthService;
+  final JwtAuthService jwtAuthService;
 
-  MyUserDetailsService uds;
+  final MyUserDetailsService uds;
 
-  PasswordEncoder pwEncoder;
+  final PasswordEncoder pwEncoder;
 
   @Autowired
   public AuthController(JwtAuthService studentService, MyUserDetailsService uds,

@@ -20,9 +20,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-  JwtAuthService jwtService;
+  final JwtAuthService jwtService;
 
-  MyUserDetailsService userDetailsService;
+  final MyUserDetailsService userDetailsService;
 
 
   @Autowired
@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     String jwt = authHeader.substring(7);
-    Boolean isValid = jwtService.isTokenValid(jwt);
+    boolean isValid = jwtService.isTokenValid(jwt);
 
     if (!isValid) {
       throw new SecurityException("JWT not valid");

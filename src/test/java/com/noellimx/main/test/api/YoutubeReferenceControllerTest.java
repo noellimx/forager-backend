@@ -7,7 +7,6 @@ import com.noellimx.main.test.utils.authenticate.Authenticate;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -28,20 +27,13 @@ import org.springframework.web.reactive.function.BodyInserters;
 public class YoutubeReferenceControllerTest {
 
   private final WebTestClient webTestClient;
-  private final YoutubeReferenceService ss;
 
 
-  SerialGenerator serialGenerator = new SerialGenerator();
+  final SerialGenerator serialGenerator = new SerialGenerator();
 
   @Autowired
   public YoutubeReferenceControllerTest(WebTestClient webTestClient, YoutubeReferenceService ss) {
     this.webTestClient = webTestClient;
-
-    this.ss = ss;
-  }
-
-  @BeforeAll
-  public void seed() {
 
   }
 

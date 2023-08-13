@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentService {
 
-  StudentRepository studentDAO;
+  final StudentRepository studentDAO;
 
   @Autowired
   public StudentService(StudentRepository studentDAO) {
@@ -39,11 +39,7 @@ public class StudentService {
   public Student getById(Integer id) {
     Optional<Student> s = studentDAO.findById(id);
 
-    if (s.isEmpty()) {
-      return null;
-    }
-
-    return s.get();
+    return s.orElse(null);
 
   }
 

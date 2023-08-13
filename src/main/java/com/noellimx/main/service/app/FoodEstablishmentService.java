@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 public class FoodEstablishmentService {
 
 
-  FoodEstablishmentRepository repo;
+  final FoodEstablishmentRepository repo;
 
 
   private static void prevalidate(FoodEstablishment input) {
-    if (input.getSfaLicenseNo() == "") {
+    if (input.getSfaLicenseNo().equals("")) {
       throw new RuntimeException("CreateValidator fail: postal code size inexact");
     }
   }
@@ -32,10 +32,7 @@ public class FoodEstablishmentService {
   public FoodEstablishment getByLicenseNo(String no) {
     Optional<FoodEstablishment> s = repo.findBySfaLicenseNo(no);
 
-    if (s.isEmpty()) {
-      return null;
-    }
-    return s.get();
+    return s.orElse(null);
   }
 
   @Autowired
