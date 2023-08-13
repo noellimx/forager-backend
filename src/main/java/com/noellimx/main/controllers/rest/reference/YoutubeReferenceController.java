@@ -1,10 +1,11 @@
 package com.noellimx.main.controllers.rest.reference;
 
 
-import com.noellimx.main.controllers.rest.reference.bodytype.request.YoutubeReferenceForm;
+import com.noellimx.main.controllers.rest.reference.bodytype.request.YoutubeReferenceCreateRequestBody;
 import com.noellimx.main.controllers.rest.utils.JsonResponse;
 import com.noellimx.main.entity.YoutubeReference;
 import com.noellimx.main.service.app.YoutubeReferenceService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -27,7 +28,8 @@ public class YoutubeReferenceController {
   }
 
   @PostMapping("/")
-  public ResponseEntity<YoutubeReference> create(@RequestBody YoutubeReferenceForm form,
+  public ResponseEntity<YoutubeReference> create(
+      @RequestBody YoutubeReferenceCreateRequestBody form,
       Authentication a) {
 
     UserDetails user = (UserDetails) a.getPrincipal();
@@ -40,7 +42,7 @@ public class YoutubeReferenceController {
 
   @GetMapping("/all")
   public JsonResponse getAll() {
-    JsonResponse response = new JsonResponse<>(
+    JsonResponse<List<YoutubeReference>> response = new JsonResponse<>(
         service.getAll(), "");
     return response;
   }

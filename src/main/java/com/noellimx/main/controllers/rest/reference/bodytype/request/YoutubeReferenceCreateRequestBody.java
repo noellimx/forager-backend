@@ -2,10 +2,10 @@ package com.noellimx.main.controllers.rest.reference.bodytype.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class YoutubeReferenceForm {
+public class YoutubeReferenceCreateRequestBody {
 
 
-  private YoutubeReferenceForm() {
+  private YoutubeReferenceCreateRequestBody() {
   }
 
   @JsonProperty("sfa_license_no")
