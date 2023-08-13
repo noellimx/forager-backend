@@ -32,7 +32,7 @@ components:
           type: string
           description: authentication token
 
-    FoodEstablishmentRequest:
+    FoodEstablishmentCreateRequestBody:
       type: object
       properties:
         sfa_license_no:
@@ -121,7 +121,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FoodEstablishmentRequest'
+              $ref: '#/components/schemas/FoodEstablishmentCreateRequestBody'
       responses:
         '201':
           description: Food establishment created successfully
@@ -141,7 +141,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/FoodEstablishmentRequest'
+                      $ref: '#/components/schemas/FoodEstablishmentCreateRequestBody'
                   message:
                     type: string
   /reference/youtube/:
