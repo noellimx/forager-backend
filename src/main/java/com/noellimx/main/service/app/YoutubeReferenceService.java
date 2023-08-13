@@ -13,12 +13,8 @@ import org.springframework.stereotype.Component;
 public class YoutubeReferenceService {
 
 
-  YoutubeReferenceRepository repo;
+  final YoutubeReferenceRepository repo;
 
-
-  private static void prevalidate(YoutubeReference input) {
-
-  }
 
   @Autowired
   public YoutubeReferenceService(YoutubeReferenceRepository repo) {
@@ -34,24 +30,19 @@ public class YoutubeReferenceService {
   public YoutubeReference findByLicenseNo(String no) {
     Optional<YoutubeReference> s = repo.findBySfaLicenseNo(no);
 
-    if (s.isEmpty()) {
-      return null;
-    }
-    return s.get();
+    return s.orElse(null);
   }
 
 
   @Transactional
   public List<YoutubeReference> findAllByLicenseNo(String no) {
-    List<YoutubeReference> s = repo.findAllBySfaLicenseNo(no);
 
-    return s;
+    return repo.findAllBySfaLicenseNo(no);
   }
 
   @Transactional
   public List<YoutubeReference> findAllByVideoId(String video_id) {
-    List<YoutubeReference> s = repo.findAllByVideoId(video_id);
-    return s;
+    return repo.findAllByVideoId(video_id);
   }
 
   @Transactional
@@ -59,10 +50,6 @@ public class YoutubeReferenceService {
       String timestamp, String username) {
     YoutubeReference est = new YoutubeReference(videoId, sfaLicenseNo, timestamp, username);
 
-    prevalidate(est);
-
-    YoutubeReference s = repo.save(est);
-
-    return s;
+    return repo.save(est);
   }
 }

@@ -53,11 +53,9 @@ public class MyUserDetailsService implements UserDetailsManager {
     A role4 = new A("ROLE_USER");
     System.out.println("UserService::loadUserByUsername converting to user details ...");
 
-    UserDetails userDetails = new User(user.getUsername(), user.getPassword(), true, true, true,
+    return new User(user.getUsername(), user.getPassword(), true, true, true,
         true,
         Arrays.asList(role3, role4));
-
-    return userDetails;
   }
 
   @Override
@@ -73,9 +71,7 @@ public class MyUserDetailsService implements UserDetailsManager {
   @Transactional
   public UserDetails authenticateUser(UserDetails userDetails) {
 
-    AppUser user = userRepository.findByUsername(userDetails.getUsername());
-
-    user = userRepository.findByUsernameAndPassword(userDetails.getUsername(),
+    AppUser user = userRepository.findByUsernameAndPassword(userDetails.getUsername(),
         userDetails.getPassword());
 
     if (user == null) {

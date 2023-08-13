@@ -56,7 +56,7 @@ or with container:
 
 #### Release
 
-Refer `.github/workflows/publish-image.yaml` for hook to create GitHub release.
+Refer `.github/workflows/publish-image.yaml` for hook to create release in DockerHub.
 
 #### drawio
 

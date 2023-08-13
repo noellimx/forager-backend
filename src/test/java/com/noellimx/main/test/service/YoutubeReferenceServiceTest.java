@@ -17,7 +17,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 @TestInstance(Lifecycle.PER_CLASS)
 public class YoutubeReferenceServiceTest {
 
-  YoutubeReferenceService service;
+  final YoutubeReferenceService service;
 
   @Autowired
   public YoutubeReferenceServiceTest(YoutubeReferenceService service) {
@@ -40,12 +40,12 @@ public class YoutubeReferenceServiceTest {
     // third reference without username
     service.create("Uzl77r-lR2M", "E78125L003", "1:30", "");
 
-    Assertions.assertTrue(service.findAllByLicenseNo("E78125L001").size() == 1);
-    Assertions.assertTrue(service.findAllByVideoId("Uzl77r-lR2M").size() == 3);
+    Assertions.assertEquals(1, service.findAllByLicenseNo("E78125L001").size());
+    Assertions.assertEquals(3, service.findAllByVideoId("Uzl77r-lR2M").size());
 
     // Another video reference for establishment E78125L001.
     service.create("Uzl77r-1234", "E78125L001", "12:30", "sometestuser");
 
-    Assertions.assertTrue(service.findAllByLicenseNo("E78125L001").size() == 2);
+    Assertions.assertEquals(2, service.findAllByLicenseNo("E78125L001").size());
   }
 }

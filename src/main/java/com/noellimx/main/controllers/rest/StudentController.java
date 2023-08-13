@@ -22,7 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class StudentController {
 
 
-  StudentService studentService;
+  final StudentService studentService;
 
 
   @Autowired

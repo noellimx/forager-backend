@@ -10,8 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorld {
 
 
+  final Venus venus;
+
+
   @Autowired
-  Venus venus;
+  public HelloWorld(Venus venus) {
+    this.venus = venus;
+  }
 
   @GetMapping("/")
   public String sayHello() {

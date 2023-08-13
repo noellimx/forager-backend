@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtAuthService {
 
-  JwtTokenService tokenService;
+  final JwtTokenService tokenService;
 
-  Key key;
+  final Key key;
 
   @Autowired
   public JwtAuthService(JwtTokenService tokenService, Key appSignInKey) {

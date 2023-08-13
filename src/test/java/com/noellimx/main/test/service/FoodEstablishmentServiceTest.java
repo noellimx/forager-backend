@@ -18,7 +18,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 @TestInstance(Lifecycle.PER_CLASS)
 public class FoodEstablishmentServiceTest {
 
-  FoodEstablishmentService service;
+  final FoodEstablishmentService service;
 
   @Autowired
   public FoodEstablishmentServiceTest(FoodEstablishmentService FoodEstablishmentService) {
@@ -38,21 +38,5 @@ public class FoodEstablishmentServiceTest {
         () -> this.service.create("E78125L001", "", ""));
   }
 
-//  @Test
-//  @Order(2)
-//  public void ShouldUpdate() {
-//    List<Student> students = service.findByFirstAndLastName("My", "First");
-//    Assertions.assertTrue(students.size() > 0);
-//
-//    Student student = students.get(0);
-//
-//    String updatedLastName = "First-Modified";
-//    student.setLastName(updatedLastName);
-//
-//    service.update(student);
-//
-//    Assertions.assertEquals(updatedLastName,
-//        service.getByLicenseNo(student.getId()).getLastName());
-//  }
 
 }

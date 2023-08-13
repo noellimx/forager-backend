@@ -16,11 +16,6 @@ public class IntegrationTest {
   private WebTestClient webTestClient;
 
   @Test
-  public void contextLoads() {
-
-  }
-
-  @Test
   public void ShouldReturnOK() {
     this.webTestClient
         .get()
@@ -28,17 +23,13 @@ public class IntegrationTest {
 
         .exchange()
         .expectStatus().isOk().returnResult(String.class).getResponseBody()
-        .subscribe(responseBody -> {
-          System.out.println("Response Body: " + responseBody);
-        });
+        .subscribe(responseBody -> System.out.println("Response Body: " + responseBody));
 
     this.webTestClient
         .get()
         .uri("/defense")
         .exchange()
         .expectStatus().isOk().returnResult(String.class).getResponseBody()
-        .subscribe(responseBody -> {
-          assertEquals(responseBody, "-2");
-        });
+        .subscribe(responseBody -> assertEquals(responseBody, "-2"));
   }
 }

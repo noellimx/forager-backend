@@ -19,8 +19,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @TestMethodOrder(OrderAnnotation.class)
 public class JwtAuthServiceTest {
 
-  JwtAuthService service;
-  JwtTokenService tokenService;
+  final JwtAuthService service;
+  final JwtTokenService tokenService;
 
   private static final String testKey = "fb8e20fc2e4c3f248c60c39bd652f3c1347298bb977b8b4d5903b85055620603";
 
@@ -38,7 +38,7 @@ public class JwtAuthServiceTest {
     UserDetails userDetails = User.builder().username(username).password(password).build();
     String token = this.service.generateToken(userDetails);
 
-    Boolean got = this.service.isTokenValid(token);
+    boolean got = this.service.isTokenValid(token);
 
     Claims claims = this.service.extractAllClaims(token);
 

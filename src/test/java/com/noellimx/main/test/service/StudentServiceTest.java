@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class StudentServiceTest {
 
 
-  StudentService studentService;
+  final StudentService studentService;
 
   @Autowired
   public StudentServiceTest(StudentService studentService) {

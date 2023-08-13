@@ -18,9 +18,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @TestMethodOrder(OrderAnnotation.class)
 public class UserServiceTest {
 
-  MyUserDetailsService service;
+  final MyUserDetailsService service;
 
-  SerialGenerator serialGenerator = new SerialGenerator();
+  final SerialGenerator serialGenerator = new SerialGenerator();
   private static final String testKey = "fb8e20fc2e4c3f248c60c39bd652f3c1347298bb977b8b4d5903b85055620603";
 
   @Autowired
