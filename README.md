@@ -1,20 +1,26 @@
 # Application
 
+## Requirements
+
+Database Schema Version: `https://github.com/noellimx/forager-database/releases/tag/v0.0.1-alpha`
+
 ## OpenAPI docs
 
 `./openapi`
 
 # Development Notes
 
-## Configuration and Profiles
+## Configuration
 
-The default profile is disabled.
+- The default profile is disabled.
 
 ### Profiles
 
+Variables are not stored in application properties. Use environment variables for app configuration
+in respective environments.
+
 - Development: Starts web application in development mode.
 - Test: For unit and integration test execution.
-- Production: For deployment.
 
 ### Persistence Strategy
 
