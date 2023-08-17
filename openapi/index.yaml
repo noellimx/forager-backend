@@ -8,8 +8,7 @@ components:
   securitySchemes:
     tokenHeader:
       type: http
-      in: header
-      name: Authorization
+      scheme: basic
       description: authentication token in request
   schemas:
     UserRequest:
@@ -22,9 +21,9 @@ components:
           type: string
           description: User's password
     RegisterUserRequest:
-      $ref: '#/components/schemas/UserRequest'
+      $ref: "#/components/schemas/UserRequest"
     AuthenticateUserRequest:
-      $ref: '#/components/schemas/UserRequest'
+      $ref: "#/components/schemas/UserRequest"
     TokenResponse:
       type: object
       properties:
@@ -89,9 +88,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegisterUserRequest'
+              $ref: "#/components/schemas/RegisterUserRequest"
       responses:
-        '201':
+        "201":
           description: User created successfully
   /auth/authenticate:
     post:
@@ -101,37 +100,37 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AuthenticateUserRequest'
+              $ref: "#/components/schemas/AuthenticateUserRequest"
       responses:
-        '200':
+        "200":
           description: Token obtained successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenResponse'
-        '401':
+                $ref: "#/components/schemas/TokenResponse"
+        "401":
           description: Token not obtained. Credentials not matched.
   /establishment/:
     post:
       summary: Create a food establishment
       security:
-        - tokenHeader: [ ]
+        - tokenHeader: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FoodEstablishmentCreateRequestBody'
+              $ref: "#/components/schemas/FoodEstablishmentCreateRequestBody"
       responses:
-        '201':
+        "201":
           description: Food establishment created successfully
   /establishment/all:
     post:
       summary: Get establishment
       security:
-        - tokenHeader: [ ]
+        - tokenHeader: []
       responses:
-        '200':
+        "200":
           description: Food establishment get all successfully
           content:
             application/json:
@@ -141,7 +140,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/FoodEstablishmentCreateRequestBody'
+                      $ref: "#/components/schemas/FoodEstablishmentCreateRequestBody"
                   message:
                     type: string
   /reference/youtube/:
@@ -158,7 +157,7 @@ paths:
         "200":
           description: "OK"
           content:
-            '*/*':
+            "*/*":
               schema:
                 $ref: "#/components/schemas/YoutubeReference"
   /reference/youtube/all:
@@ -169,7 +168,7 @@ paths:
         "200":
           description: "OK"
           content:
-            'application/json':
+            "application/json":
               schema:
                 type: object
                 properties:
@@ -179,4 +178,3 @@ paths:
                       $ref: "#/components/schemas/YoutubeReference"
                   message:
                     type: string
-
