@@ -42,7 +42,7 @@ public class AuthControllerTest {
 
     this.webTestClient
         .post()
-        .uri("/auth/register")
+        .uri("/api/auth/register")
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
@@ -60,7 +60,7 @@ public class AuthControllerTest {
 
     this.webTestClient
         .post()
-        .uri("/auth/register")
+        .uri("/api/auth/register")
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
@@ -68,7 +68,7 @@ public class AuthControllerTest {
 
     this.webTestClient
         .post()
-        .uri("/auth/register")
+        .uri("/api/auth/register")
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
@@ -90,7 +90,7 @@ public class AuthControllerTest {
 
     this.webTestClient
         .post()
-        .uri("/auth/register")
+        .uri("/api/auth/register")
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
@@ -98,7 +98,7 @@ public class AuthControllerTest {
 
     AuthenticatedResponse response = this.webTestClient
         .post()
-        .uri("/auth/authenticate")
+        .uri("/api/auth/authenticate")
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()

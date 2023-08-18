@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/food-establishment")
+@RequestMapping("/api/food-establishment")
 public class FoodEstablishmentController {
 
   final FoodEstablishmentService foodEstablishmentService;

@@ -17,7 +17,7 @@ public class Authenticate {
 
     webTestClient
         .post()
-        .uri("/auth/register")
+        .uri("/api/auth/register")
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
@@ -25,7 +25,7 @@ public class Authenticate {
 
     AuthenticatedResponse response = webTestClient
         .post()
-        .uri("/auth/authenticate")
+        .uri("/api/auth/authenticate")
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()

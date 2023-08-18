@@ -38,7 +38,7 @@ public class FoodEstablishmentControllerTest {
   public void ShouldReturnOK_Items_Many() {
     this.webTestClient
         .get()
-        .uri("/food-establishment/all")
+        .uri("/api/food-establishment/all")
         .exchange()
         .expectStatus().isOk().expectBody();
 //

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/reference/youtube")
+@RequestMapping("/api/reference/youtube")
 public class YoutubeReferenceController {
 
   final YoutubeReferenceService service;
