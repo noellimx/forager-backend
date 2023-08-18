@@ -49,7 +49,7 @@ public class CreatingFoodEstablishmentTest {
 
     this.webTestClient
         .post()
-        .uri("/auth/register")
+        .uri("/api/auth/register")
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
@@ -57,7 +57,7 @@ public class CreatingFoodEstablishmentTest {
 
     AuthenticatedResponse response = this.webTestClient
         .post()
-        .uri("/auth/authenticate")
+        .uri("/api/auth/authenticate")
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
@@ -80,7 +80,7 @@ public class CreatingFoodEstablishmentTest {
 
     FoodEstablishmentForm form = this.webTestClient
         .post()
-        .uri("/food-establishment/").headers(h -> h.set("Authorization", "Bearer " + token))
+        .uri("/api/food-establishment/").headers(h -> h.set("Authorization", "Bearer " + token))
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()

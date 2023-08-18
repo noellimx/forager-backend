@@ -54,7 +54,7 @@ public class YoutubeReferenceControllerTest {
 
     YoutubeReference ref = this.webTestClient
         .post()
-        .uri("/reference/youtube/").headers(h -> h.set("Authorization", "Bearer " + token))
+        .uri("/api/reference/youtube/").headers(h -> h.set("Authorization", "Bearer " + token))
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()

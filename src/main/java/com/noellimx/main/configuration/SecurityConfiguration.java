@@ -24,7 +24,7 @@ public class SecurityConfiguration {
 
     http.authorizeHttpRequests((authorizeHttpRequests) ->
         authorizeHttpRequests
-            .requestMatchers("/food-establishment").authenticated()
+            .requestMatchers("/api/food-establishment").authenticated()
             .anyRequest().permitAll()
     );
 
