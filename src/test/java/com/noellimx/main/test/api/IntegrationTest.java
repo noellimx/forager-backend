@@ -22,8 +22,7 @@ public class IntegrationTest {
         .uri("/")
 
         .exchange()
-        .expectStatus().isOk().returnResult(String.class).getResponseBody()
-        .subscribe(responseBody -> System.out.println("Response Body: " + responseBody));
+        .expectStatus().isOk();
 
     this.webTestClient
         .get()

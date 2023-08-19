@@ -86,8 +86,6 @@ public class AuthControllerTest {
     bodyMap.put("username", username);
     bodyMap.put("password", password);
 
-    System.out.println("ShouldReturnOK_WithToken_RegisterAndLogin " + bodyMap);
-
     this.webTestClient
         .post()
         .uri("/api/auth/register")

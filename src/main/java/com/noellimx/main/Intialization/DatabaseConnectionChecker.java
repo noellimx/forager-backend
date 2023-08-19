@@ -25,8 +25,7 @@ public class DatabaseConnectionChecker implements ApplicationRunner {
 
     } catch (Exception e) {
       // Log a warning and exit the application
-      System.err.println(
-          "Warning: Database connection failed during initialization.");
+      System.err.println("Warning: Database connection failed during initialization.");
     }
   }
 }

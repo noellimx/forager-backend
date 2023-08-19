@@ -50,7 +50,6 @@ public class StudentDAOTest {
 
     int id = student.getId();
 
-    System.out.println("ShouldUpdateDAO id " + id);
     student.setLastName("NEWB");
     studentDAO.update(student);
 

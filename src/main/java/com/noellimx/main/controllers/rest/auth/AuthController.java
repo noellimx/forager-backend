@@ -62,7 +62,6 @@ public class AuthController {
     }
     String token = jwtAuthService.generateToken(userDetails);
 
-    System.out.println("Controller authenticated:  " + token);
     return ResponseEntity.ok(new AuthenticatedResponse(token));
   }
 }
