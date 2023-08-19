@@ -35,17 +35,28 @@ public class FoodEstablishmentService {
     return s.orElse(null);
   }
 
+
+  @Transactional
+  public FoodEstablishment getOrCreateByLicenseNo(String no) {
+    FoodEstablishment s = getByLicenseNo(no);
+    if (s == null) {
+      return create(no, "", "");
+    }
+    return s;
+  }
+
+
   @Autowired
   public FoodEstablishmentService(FoodEstablishmentRepository repo) {
     this.repo = repo;
   }
 
   @Transactional
-  public void create(String li, String po, String businessName) {
+  public FoodEstablishment create(String li, String po, String businessName) {
 
     FoodEstablishment est = new FoodEstablishment(li, po, businessName);
 
     prevalidate(est);
-    repo.save(est);
+    return repo.save(est);
   }
 }

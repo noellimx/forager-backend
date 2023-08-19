@@ -14,6 +14,5 @@ public interface YoutubeReferenceRepository extends JpaRepository<YoutubeReferen
 
   List<YoutubeReference> findAllBySfaLicenseNo(String sfaLicenseNo);
 
-  List<YoutubeReference> findAllByVideoId(String sfaLicenseNo);
 
 }

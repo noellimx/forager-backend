@@ -1,6 +1,7 @@
 package com.noellimx.main.service.app;
 
 
+import com.noellimx.main.entity.FoodEstablishment;
 import com.noellimx.main.entity.YoutubeReference;
 import com.noellimx.main.respository.YoutubeReferenceRepository;
 import jakarta.transaction.Transactional;
@@ -14,11 +15,15 @@ public class YoutubeReferenceService {
 
 
   final YoutubeReferenceRepository repo;
+  final FoodEstablishmentService foodEstablishmentService;
 
 
   @Autowired
-  public YoutubeReferenceService(YoutubeReferenceRepository repo) {
+  public YoutubeReferenceService(YoutubeReferenceRepository repo,
+      FoodEstablishmentService foodEstablishmentService) {
     this.repo = repo;
+
+    this.foodEstablishmentService = foodEstablishmentService;
   }
 
   @Transactional
@@ -37,19 +42,19 @@ public class YoutubeReferenceService {
   @Transactional
   public List<YoutubeReference> findAllByLicenseNo(String no) {
 
+    System.out.println("[findAllByLicenseNo]");
     return repo.findAllBySfaLicenseNo(no);
   }
 
-  @Transactional
-  public List<YoutubeReference> findAllByVideoId(String video_id) {
-    return repo.findAllByVideoId(video_id);
-  }
 
   @Transactional
   public YoutubeReference create(String videoId, String sfaLicenseNo,
       String timestamp, String username) {
-    YoutubeReference est = new YoutubeReference(videoId, sfaLicenseNo, timestamp, username);
 
-    return repo.save(est);
+    FoodEstablishment est = this.foodEstablishmentService.getOrCreateByLicenseNo(sfaLicenseNo);
+
+    YoutubeReference ref = new YoutubeReference(videoId, est, sfaLicenseNo, timestamp, username);
+
+    return repo.save(ref);
   }
 }
