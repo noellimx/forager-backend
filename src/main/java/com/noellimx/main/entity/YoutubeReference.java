@@ -20,10 +20,8 @@ import java.io.Serializable;
         "food_establishment_id"})})
 public class YoutubeReference {
 
-
   @Embeddable
   public static class YoutubeReferenceKey implements Serializable {
-
 
     @Column(name = "food_establishment_id")
     private Integer foodEstablishmentId;
@@ -93,9 +91,6 @@ public class YoutubeReference {
   private YoutubeReferenceKey id;
 
 
-  @Column(name = "sfa_license_no_2", nullable = false)
-  private String sfaLicenseNo;
-
   @Column(name = "timestamp", nullable = false)
   private String timestamp;
 
@@ -114,21 +109,12 @@ public class YoutubeReference {
   public YoutubeReference(String videoId, FoodEstablishment fe, String sfaLicenseNo,
       String timestamp, String username) {
     this.id = new YoutubeReferenceKey(fe.getId(), videoId);
-    this.sfaLicenseNo = sfaLicenseNo;
     this.timestamp = timestamp;
     this.creator_name = username;
 
     this.foodEstablishment = fe;
   }
 
-
-  public String getSfaLicenseNo() {
-    return sfaLicenseNo;
-  }
-
-  public void setSfaLicenseNo(String sfaLicenseNo) {
-    this.sfaLicenseNo = sfaLicenseNo;
-  }
 
   public String getTimestamp() {
     return timestamp;
@@ -180,7 +166,6 @@ public class YoutubeReference {
   public String toString() {
     return "YoutubeReference{" +
         "id=" + id +
-        ", sfaLicenseNo='" + sfaLicenseNo + '\'' +
         ", timestamp='" + timestamp + '\'' +
         ", creator_name='" + creator_name + '\'' +
         ", foodEstablishment=" + foodEstablishment +

@@ -41,13 +41,21 @@ public class YoutubeReferenceServiceTest {
     foodEstablishmentService.create(sfa1, "", "");
     foodEstablishmentService.create(sfa2, "", "");
     foodEstablishmentService.create(sfa3, "", "");
-    service.create("Uzl77r-lR2M", sfa1, "1:30", "sometestuser");
-    service.create("Uzl77r-lR2M", sfa2, "1:30", "sometestuser");
-    service.create("Uzl77r-lR2M", sfa3, "1:30", "sometestuser");
 
+    String vidId1 = "Uzl77r-lR2M";
+    String vidId2 = "Uzl99r-lR2M";
+    service.create(vidId1, sfa1, "1:30", "sometestuser");
+    service.create(vidId1, sfa2, "1:30", "sometestuser");
+    service.create(vidId1, sfa3, "1:30", "sometestuser");
+
+    service.create(vidId2, sfa2, "1:30", "sometestuser");
 //
     Assertions.assertEquals(1, service.findAllByLicenseNo(sfa1).size());
-//    Assertions.assertEquals(3, service.findAllByVideoId("Uzl77r-lR2M").size());
+    Assertions.assertEquals(2, service.findAllByLicenseNo(sfa2).size());
+    Assertions.assertEquals(3, service.findAllByVideoId(vidId1).size());
+    Assertions.assertEquals(1, service.findAllByVideoId(vidId2).size());
+    Assertions.assertEquals(1, service.findAllByVideoIdFoodEstablishmentId(vidId1, sfa1).size());
+    Assertions.assertNotNull(service.findByVideoIdFoodEstablishmentId(vidId1, sfa1));
 //
 //    // Another video reference for establishment E78125L001.
 //    service.create("Uzl77r-1234", "E78125L001", "12:30", "sometestuser");

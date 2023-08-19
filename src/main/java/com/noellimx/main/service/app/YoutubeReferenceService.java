@@ -6,7 +6,6 @@ import com.noellimx.main.entity.YoutubeReference;
 import com.noellimx.main.respository.YoutubeReferenceRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,19 +30,27 @@ public class YoutubeReferenceService {
     return repo.findAll();
   }
 
-  @Transactional
-  public YoutubeReference findByLicenseNo(String no) {
-    Optional<YoutubeReference> s = repo.findBySfaLicenseNo(no);
-
-    return s.orElse(null);
-  }
-
 
   @Transactional
   public List<YoutubeReference> findAllByLicenseNo(String no) {
 
-    System.out.println("[findAllByLicenseNo]");
-    return repo.findAllBySfaLicenseNo(no);
+    return repo.findAllByFoodEstablishmentSfaLicenseNo(no);
+  }
+
+
+  @Transactional
+  public List<YoutubeReference> findAllByVideoIdFoodEstablishmentId(String v, String l) {
+    return repo.findAllByIdVideoIdAndFoodEstablishmentSfaLicenseNo(v, l);
+  }
+
+  @Transactional
+  public YoutubeReference findByVideoIdFoodEstablishmentId(String v, String l) {
+    return repo.findByIdVideoIdAndFoodEstablishmentSfaLicenseNo(v, l).orElse(null);
+  }
+
+  @Transactional
+  public List<YoutubeReference> findAllByVideoId(String no) {
+    return repo.findByIdVideoId(no);
   }
 
 
