@@ -95,7 +95,7 @@ public class YoutubeReference {
   private String timestamp;
 
   @Column(name = "creator_name")
-  private String creator_name;
+  private String creatorName;
 
 
   @MapsId("foodEstablishmentId")
@@ -110,8 +110,7 @@ public class YoutubeReference {
       String timestamp, String username) {
     this.id = new YoutubeReferenceKey(fe.getId(), videoId);
     this.timestamp = timestamp;
-    this.creator_name = username;
-
+    this.creatorName = username;
     this.foodEstablishment = fe;
   }
 
@@ -125,11 +124,11 @@ public class YoutubeReference {
   }
 
   public String getCreatorName() {
-    return creator_name;
+    return creatorName;
   }
 
   public void setCreatorName(String creator_name) {
-    this.creator_name = creator_name;
+    this.creatorName = creator_name;
   }
 
   public YoutubeReferenceKey getId() {
@@ -145,13 +144,6 @@ public class YoutubeReference {
     this.id = new YoutubeReferenceKey(fe);
   }
 
-  public String getCreator_name() {
-    return creator_name;
-  }
-
-  public void setCreator_name(String creator_name) {
-    this.creator_name = creator_name;
-  }
 
   public FoodEstablishment getFoodEstablishment() {
     return foodEstablishment;
@@ -167,7 +159,7 @@ public class YoutubeReference {
     return "YoutubeReference{" +
         "id=" + id +
         ", timestamp='" + timestamp + '\'' +
-        ", creator_name='" + creator_name + '\'' +
+        ", creator_name='" + creatorName + '\'' +
         ", foodEstablishment=" + foodEstablishment +
         '}';
   }
