@@ -16,15 +16,6 @@ public class FoodEstablishment {
   @Column(name = "id")
   private Integer id;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
-
   @Column(unique = true, name = "sfa_license_no", nullable = false)
   private String sfaLicenseNo;
 
@@ -34,6 +25,7 @@ public class FoodEstablishment {
   @Column(name = "business_name")
   private String businessName;
 
+
   public FoodEstablishment(String licenseNo, String postal, String businessName) {
     this.sfaLicenseNo = licenseNo;
     this.postalCodeOfficial = postal;
@@ -42,6 +34,15 @@ public class FoodEstablishment {
 
   public FoodEstablishment() {
 
+  }
+
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getId() {
+    return id;
   }
 
   public String getSfaLicenseNo() {
