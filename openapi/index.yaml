@@ -67,16 +67,14 @@ components:
     YoutubeReference:
       type: "object"
       properties:
-        id:
-          type: "integer"
-          format: "int32"
         video_id:
           type: "string"
-        sfa_license_no:
-          type: "string"
+        food_establishment:
+          type: object
+          properties:
+            sfa_license_no:
+              type: "string"
         timestamp:
-          type: "string"
-        creator:
           type: "string"
 
 paths:

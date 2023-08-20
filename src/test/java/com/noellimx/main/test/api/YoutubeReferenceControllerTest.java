@@ -37,7 +37,7 @@ public class YoutubeReferenceControllerTest {
 
   @Test
   @Order(1)
-  public void ShouldReturnOK_Items_Many() {
+  public void ShouldReturnOK_CreateItemOne() {
 
     String username = ("userreglogin" + serialGenerator.next()).substring(0, 20);
 
@@ -72,8 +72,6 @@ public class YoutubeReferenceControllerTest {
 //              Assertions.assertEquals("t123", ref.getTimestamp());
 //            }
         );
-
-
   }
 
 }

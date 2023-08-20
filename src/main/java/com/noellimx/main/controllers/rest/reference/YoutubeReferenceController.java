@@ -37,9 +37,6 @@ public class YoutubeReferenceController {
     YoutubeReference ref = youtubeReferenceService.create(form.videoId, form.sfaLicenseNo,
         form.timestamp, user.getUsername());
 
-    System.out.println("[tt]");
-    System.out.println(ref);
-
     YoutubeReferenceResponse tt = YoutubeReferenceResponse.fromEntity(ref);
 
     return ResponseEntity.status(200).body(tt);
