@@ -1,11 +1,13 @@
 package com.noellimx.main.controllers.rest.reference;
 
-
 import com.noellimx.main.controllers.rest.reference.bodytype.request.YoutubeReferenceCreateRequestBody;
 import com.noellimx.main.controllers.rest.reference.bodytype.response.YoutubeReferenceResponse;
 import com.noellimx.main.controllers.rest.utils.JsonResponse;
 import com.noellimx.main.entity.YoutubeReference;
 import com.noellimx.main.service.app.YoutubeReferenceService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -43,8 +45,10 @@ public class YoutubeReferenceController {
   }
 
   @GetMapping("/all")
-  public JsonResponse getAll() {
-    return new JsonResponse<>(
-        youtubeReferenceService.getAll(), "");
+  public JsonResponse<List<YoutubeReferenceResponse>> getAll() {
+
+    List<YoutubeReference> refs = youtubeReferenceService.getAll();
+    List<YoutubeReferenceResponse> respRefs = YoutubeReferenceResponse.fromEntities(refs);
+    return new JsonResponse<List<YoutubeReferenceResponse>>(respRefs, "");
   }
 }

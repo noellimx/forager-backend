@@ -1,16 +1,14 @@
 package com.noellimx.main.controllers.rest.reference.bodytype.response;
 
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.noellimx.main.entity.YoutubeReference;
 
-
 public class YoutubeReferenceResponse {
-
 
   @JsonProperty("video_id")
   private String videoId;
-
 
   @JsonProperty("timestamp")
   private String timestamp;
@@ -34,7 +32,6 @@ public class YoutubeReferenceResponse {
     this.timestamp = timestamp;
   }
 
-
   public ResponseFoodEstablishment getResponseFoodEstablishment() {
     return responseFoodEstablishment;
   }
@@ -43,7 +40,6 @@ public class YoutubeReferenceResponse {
       ResponseFoodEstablishment responseFoodEstablishment) {
     this.responseFoodEstablishment = responseFoodEstablishment;
   }
-
 
   public static YoutubeReferenceResponse fromEntity(YoutubeReference ref) {
 
@@ -57,4 +53,16 @@ public class YoutubeReferenceResponse {
 
     return ryr;
   }
+
+  public static List<YoutubeReferenceResponse> fromEntities(List<YoutubeReference> refs) {
+
+    List<YoutubeReferenceResponse> result = List.of();
+    for (YoutubeReference ref : refs) {
+      result.add(fromEntity(ref));
+
+    }
+
+    return result;
+  }
+
 }

@@ -145,6 +145,7 @@ paths:
     post:
       summary: "POST reference/youtube/"
       operationId: "create"
+      description: "creates a reference associating a food establishment to a video and timestamp. If the food establishment is not identified, a placeholder entry will be created."
       requestBody:
         content:
           application/json:
