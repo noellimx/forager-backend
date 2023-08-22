@@ -26,7 +26,6 @@ public class YoutubeReferenceControllerTest {
 
   private final WebTestClient webTestClient;
 
-
   final SerialGenerator serialGenerator = new SerialGenerator();
 
   @Autowired
@@ -61,17 +60,67 @@ public class YoutubeReferenceControllerTest {
             spec -> spec.expectStatus().isEqualTo(HttpStatus.OK),
             spec -> spec.expectBody(String.class).isEqualTo(
                 "{\"video_id\":\"v123\",\"timestamp\":\"t123\",\"food_establishment\":{\"sfa_license_no\":\"LLLL003\"}}")
-            /* DO NOT DELETE: for diagnostics */
-//            ,
-//            spec -> {
-//              YoutubeReferenceResponse ref = spec.expectBody(YoutubeReferenceResponse.class)
-//                  .returnResult().getResponseBody();
-//              Assertions.assertNotNull(ref);
-//              Assertions.assertEquals("LLLL003",
-//                  ref.getResponseFoodEstablishment().getSfaLicenseNo());
-//              Assertions.assertEquals("t123", ref.getTimestamp());
-//            }
+        /* DO NOT DELETE: for diagnostics */
+        // ,
+        // spec -> {
+        // YoutubeReferenceResponse ref =
+        // spec.expectBody(YoutubeReferenceResponse.class)
+        // .returnResult().getResponseBody();
+        // Assertions.assertNotNull(ref);
+        // Assertions.assertEquals("LLLL003",
+        // ref.getResponseFoodEstablishment().getSfaLicenseNo());
+        // Assertions.assertEquals("t123", ref.getTimestamp());
+        // }
         );
+  }
+
+  @Test
+  @Order(1)
+  public void ShouldReturnOK_GetAll() {
+
+    String username = ("userreglogin" + serialGenerator.next()).substring(0, 20);
+    String password = "pwtestuser001";
+
+    String token = Authenticate.getToken(this.webTestClient, username, password);
+    Map<String, String> bodyMap = new HashMap<>();
+
+    bodyMap.put("sfa_license_no", "123");
+    bodyMap.put("video_id", "123");
+    bodyMap.put("timestamp", "1h");
+
+    this.webTestClient
+        .post()
+        .uri("/api/reference/youtube/").headers(h -> h.set("Authorization", "Bearer " + token))
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(BodyInserters.fromValue(bodyMap))
+        .exchange()
+
+        .expectAll(
+            spec -> spec.expectStatus().isEqualTo(HttpStatus.OK),
+            spec -> spec.expectBody(String.class).isEqualTo(
+                "{\"video_id\":\"123\",\"timestamp\":\"1h\",\"food_establishment\":{\"sfa_license_no\":\"123\"}}")
+        /* DO NOT DELETE: for diagnostics */
+        // ,
+        // spec -> {
+        // YoutubeReferenceResponse ref =
+        // spec.expectBody(YoutubeReferenceResponse.class)
+        // .returnResult().getResponseBody();
+        // Assertions.assertNotNull(ref);
+        // Assertions.assertEquals("LLLL003",
+        // ref.getResponseFoodEstablishment().getSfaLicenseNo());
+        // Assertions.assertEquals("t123", ref.getTimestamp());
+        // }
+        );
+
+    this.webTestClient.get()
+        .uri("/api/reference/youtube/all")
+        .exchange()
+        .expectStatus().isOk().expectBody(String.class).isEqualTo(
+            "{\"data\":[{\"video_id\":\"v123\",\"timestamp\":\"t123\",\"food_establishment\":{\"sfa_license_no\":\"LLLL003\"}},{\"video_id\":\"123\",\"timestamp\":\"1h\",\"food_establishment\":{\"sfa_license_no\":\"123\"}}],\"message\":\"\"}");
+
+    // .isEqualTo("Resource: Student not found")
+    // .jsonPath("$.status")
+    // .isEqualTo(404);
   }
 
 }

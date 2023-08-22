@@ -1,5 +1,6 @@
 package com.noellimx.main.controllers.rest.reference.bodytype.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -56,7 +57,8 @@ public class YoutubeReferenceResponse {
 
   public static List<YoutubeReferenceResponse> fromEntities(List<YoutubeReference> refs) {
 
-    List<YoutubeReferenceResponse> result = List.of();
+    List<YoutubeReferenceResponse> result = new ArrayList<>();
+
     for (YoutubeReference ref : refs) {
       result.add(fromEntity(ref));
 
