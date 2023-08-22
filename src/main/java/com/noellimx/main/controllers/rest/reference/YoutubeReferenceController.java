@@ -48,7 +48,9 @@ public class YoutubeReferenceController {
   public JsonResponse<List<YoutubeReferenceResponse>> getAll() {
 
     List<YoutubeReference> refs = youtubeReferenceService.getAll();
+
     List<YoutubeReferenceResponse> respRefs = YoutubeReferenceResponse.fromEntities(refs);
+
     return new JsonResponse<List<YoutubeReferenceResponse>>(respRefs, "");
   }
 }

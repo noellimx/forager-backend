@@ -1,21 +1,19 @@
 package com.noellimx.main.controllers.rest.reference.bodytype.response;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.noellimx.main.entity.FoodEstablishment;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class ResponseFoodEstablishment {
 
-
   @JsonProperty("sfa_license_no")
   private String sfaLicenseNo;
-
 
   public ResponseFoodEstablishment(String sfaLicenseNo) {
     this.sfaLicenseNo = sfaLicenseNo;
   }
-
 
   public ResponseFoodEstablishment() {
   }
@@ -33,7 +31,7 @@ public class ResponseFoodEstablishment {
   }
 
   public static List<ResponseFoodEstablishment> fromEntities(FoodEstablishment... fes) {
-    List<ResponseFoodEstablishment> rfes = List.of();
+    List<ResponseFoodEstablishment> rfes = Arrays.asList();
     for (FoodEstablishment fe : fes) {
       ResponseFoodEstablishment rfe = fromEntity(fe);
       rfes.add(rfe);
@@ -41,6 +39,5 @@ public class ResponseFoodEstablishment {
     }
     return rfes;
   }
-
 
 }
