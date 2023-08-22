@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "food_establishments")
@@ -16,15 +18,6 @@ public class FoodEstablishment {
   @Column(name = "id")
   private Integer id;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
-
   @Column(unique = true, name = "sfa_license_no", nullable = false)
   private String sfaLicenseNo;
 
@@ -34,6 +27,20 @@ public class FoodEstablishment {
   @Column(name = "business_name")
   private String businessName;
 
+
+  @OneToMany(mappedBy = "foodEstablishment")
+  private List<YoutubeReference> youtubeReferences;
+
+
+  public List<YoutubeReference> getYoutubeReferences() {
+    return youtubeReferences;
+  }
+
+  public void setYoutubeReferences(
+      List<YoutubeReference> youtubeReferences) {
+    this.youtubeReferences = youtubeReferences;
+  }
+
   public FoodEstablishment(String licenseNo, String postal, String businessName) {
     this.sfaLicenseNo = licenseNo;
     this.postalCodeOfficial = postal;
@@ -42,6 +49,15 @@ public class FoodEstablishment {
 
   public FoodEstablishment() {
 
+  }
+
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getId() {
+    return id;
   }
 
   public String getSfaLicenseNo() {

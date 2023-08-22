@@ -6,7 +6,7 @@ export SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3307/app?createDatabaseIfNot
 export SPRING_DATASOURCE_USERNAME=root
 export SPRING_DATASOURCE_PASSWORD=your-root-password
 export SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
-
+export SERVER_PORT=8081
 
 # Enable to clear database.
 

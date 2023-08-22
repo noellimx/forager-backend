@@ -67,16 +67,14 @@ components:
     YoutubeReference:
       type: "object"
       properties:
-        id:
-          type: "integer"
-          format: "int32"
         video_id:
           type: "string"
-        sfa_license_no:
-          type: "string"
+        food_establishment:
+          type: object
+          properties:
+            sfa_license_no:
+              type: "string"
         timestamp:
-          type: "string"
-        creator:
           type: "string"
 
 paths:
@@ -147,6 +145,7 @@ paths:
     post:
       summary: "POST reference/youtube/"
       operationId: "create"
+      description: "creates a reference associating a food establishment to a video and timestamp. If the food establishment is not identified, a placeholder entry will be created."
       requestBody:
         content:
           application/json:

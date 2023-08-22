@@ -1,12 +1,10 @@
 package com.noellimx.main.test.api;
 
-import com.noellimx.main.entity.YoutubeReference;
 import com.noellimx.main.service.app.YoutubeReferenceService;
 import com.noellimx.main.test.utils.SerialGenerator;
 import com.noellimx.main.test.utils.authenticate.Authenticate;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -39,7 +37,7 @@ public class YoutubeReferenceControllerTest {
 
   @Test
   @Order(1)
-  public void ShouldReturnOK_Items_Many() {
+  public void ShouldReturnOK_CreateItemOne() {
 
     String username = ("userreglogin" + serialGenerator.next()).substring(0, 20);
 
@@ -52,22 +50,28 @@ public class YoutubeReferenceControllerTest {
     bodyMap.put("video_id", "v123");
     bodyMap.put("timestamp", "t123");
 
-    YoutubeReference ref = this.webTestClient
+    this.webTestClient
         .post()
         .uri("/api/reference/youtube/").headers(h -> h.set("Authorization", "Bearer " + token))
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(bodyMap))
         .exchange()
-        .expectStatus().isEqualTo(HttpStatus.OK)
-        .expectBody(YoutubeReference.class)
-        .returnResult()
-        .getResponseBody();
 
-    Assertions.assertEquals("LLLL003", ref.getSfaLicenseNo());
-    Assertions.assertEquals("v123", ref.getVideoId());
-    Assertions.assertEquals("t123", ref.getTimestamp());
-    Assertions.assertEquals(username, ref.getCreatorName());
-
+        .expectAll(
+            spec -> spec.expectStatus().isEqualTo(HttpStatus.OK),
+            spec -> spec.expectBody(String.class).isEqualTo(
+                "{\"video_id\":\"v123\",\"timestamp\":\"t123\",\"food_establishment\":{\"sfa_license_no\":\"LLLL003\"}}")
+            /* DO NOT DELETE: for diagnostics */
+//            ,
+//            spec -> {
+//              YoutubeReferenceResponse ref = spec.expectBody(YoutubeReferenceResponse.class)
+//                  .returnResult().getResponseBody();
+//              Assertions.assertNotNull(ref);
+//              Assertions.assertEquals("LLLL003",
+//                  ref.getResponseFoodEstablishment().getSfaLicenseNo());
+//              Assertions.assertEquals("t123", ref.getTimestamp());
+//            }
+        );
   }
 
 }
