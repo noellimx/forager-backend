@@ -51,7 +51,6 @@ public class MyUserDetailsService implements UserDetailsManager {
 
     A role3 = new A("ROLE_ADMIN");
     A role4 = new A("ROLE_USER");
-    System.out.println("UserService::loadUserByUsername converting to user details ...");
 
     return new User(user.getUsername(), user.getPassword(), true, true, true,
         true,
@@ -61,7 +60,6 @@ public class MyUserDetailsService implements UserDetailsManager {
   @Override
   @Transactional
   public void createUser(UserDetails userDetails) {
-    System.out.println("UserService::createUser");
     AppUser user = new AppUser(
         userDetails.getUsername(),
         userDetails.getPassword());
@@ -77,9 +75,6 @@ public class MyUserDetailsService implements UserDetailsManager {
     if (user == null) {
       throw new NotFoundException("User and password pair not found.");
     }
-
-    System.out.println(
-        "authenticateUser..... pw matches" + userDetails.getPassword() + user.getPassword());
 
     return new User(user.getUsername(), "", true, true, true,
         true,

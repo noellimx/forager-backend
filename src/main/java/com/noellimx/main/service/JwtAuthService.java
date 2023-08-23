@@ -51,7 +51,6 @@ public class JwtAuthService {
   }
 
   public Claims extractAllClaims(String token) {
-    System.out.println("key: " + key);
     return this.tokenService.extractAllClaimsFromToken(token, key);
   }
 }
